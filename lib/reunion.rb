@@ -74,7 +74,12 @@ class Reunion
   end
 
   def detailed_breakout
-    
+    detailed = {}
+    find_participants.each do |person|
+      detailed[person.to_sym] = [
+        activities_by_person(person).each do |activity| 
+      ]
+    end
   end
 
 end
