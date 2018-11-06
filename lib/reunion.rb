@@ -58,19 +58,21 @@ class Reunion
       specific_activity.participants.each do |name, cost|
 
         info_array = []
+        name_array = []
         inner_hash = Hash.new
-    #    binding.pry
         inner_hash[:activity] = specific_activity.name
-        inner_hash[:payees]   = [ "person owed"]
-        inner_hash[:amount]   = 1
+
+    #  binding.pry
+        breakout.each do |new_name, amount_owed|
+          if new_name != name
+            name_array << new_name
+            inner_hash[:payees] = name_array
+          end
+            inner_hash[:amount] = amount_owed
+        end
+
         info_array << inner_hash
-        outer_hash[name]      = info_array
-
-        # detailed_breakout[name] = info_array
-        # current_total      = total_money_owed[name]
-        # total_for_activity = activity.split - cost
-
-                # something = current_total + total_for_activit
+        outer_hash[name] = info_array
 
       end
     end
