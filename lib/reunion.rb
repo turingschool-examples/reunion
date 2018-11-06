@@ -43,36 +43,32 @@ class Reunion
     pretty_print.join("\n")
   end
 
+  def per_person_info
+    @activities
+    #this has something to do with breakout
+    #except for each activity, not all together
+    #I'm making this too complicated
+
+    binding.pry
+      # inner_details[:activity] = activity.name
+      #   inner_details[:amount] += value
+      #   inner_details[:payees] = [key]
+
+  end
+
   def detailed_breakout
     outer_details = Hash.new(0)
-    inner_details = Hash.new(0)
     @activities.each do |activity|
       activity.participants.each do |key, value|
         if outer_details.has_key?(key)
           key
         elsif
           outer_details[key] = inner_details #this needs to be all the mini hashes of info
+          #so i'm going to try and make a helper method that does this
         end
       end
       outer_details
-      binding.pry
-      #right now I am not making a new hash for every activity
-      #which is an issue.
-      inner_details[:activity] = activity.name
-      breakout.each do |key, value|
-        if value.postitive?
-          inner_details[:amount] += value
-        elsif value.negative?
-          inner_details[:payees] = [key]
-        end
-      end
     end
   end
 
-#the problem is I keep replacing all the
-#values with the new values instead of adding
-#them in.
-#for the payees, i should be able to shovel
-#a name in...this more needs to deal with each
-#person first and THEN everything about them.
 end
