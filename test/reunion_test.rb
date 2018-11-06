@@ -25,11 +25,21 @@ class ReunionTest < Minitest::Test
     assert_equal [@activity_1], @reunion.activities
   end
 
-  def test_it_returns_a_breakout_and_summary_of_final_amount_owed_for_each_participant
-    @activity.add_participant("Maria", 20)
-    @activity.add_participant("Luther", 40)
+  def test_it_can_return_total_cost
+    activity_2 = Activity.new("Drinks")
+    activity_2.add_participant("Maria", 60)
+    activity_2.add_participant("Luther", 60)
+    activity_2.add_participant("Louis", 0)
+    @reunion.add_activity(activity_2)
 
-    @reunion.add_activity(activity_1)
+    assert_equal 180, @reunion.total_cost
+  end
+
+  def test_it_returns_a_breakout_and_summary_of_final_amount_owed_for_each_participant
+    @activity_1.add_participant("Maria", 20)
+    @activity_1.add_participant("Luther", 40)
+
+    @reunion.add_activity(@activity_1)
     assert_equal 60, @reunion.total_cost
 
     activity_2 = Activity.new("Drinks")
