@@ -23,16 +23,10 @@ class Activity
   def owed
     new_charge = {}
     @participants.map do |key, value|
-      amount_owed = (value - split)
+      amount_owed = (split - value)
       new_charge[key] = amount_owed
     end
-    owed_value = {}
-    new_charge.each do |key, value|
-      amount_to_pay = value * -1
-      owed_value[key] = amount_to_pay
-    end
-    owed_value
+    new_charge
   end
-  # this is not a good method. but it passes
 
 end
