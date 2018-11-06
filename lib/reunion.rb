@@ -28,4 +28,12 @@ class Reunion
     end
     hash
   end
+
+  def summary
+    summary_string = ""
+    breakout.each do |key, value|
+      summary_string << "#{key}: #{value}\n"
+    end
+    summary_string.chomp
+  end
 end
