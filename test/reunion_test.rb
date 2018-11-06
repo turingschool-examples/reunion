@@ -110,5 +110,76 @@ class ReunionTest < Minitest::Test
     reunion.add_activity(activity_4)
 
     result = reunion.detailed_breakout
+    expected = {
+      "Maria" => [
+        {
+          activity: "Brunch",
+          payees: ["Luther"],
+          amount: 10
+        },
+        {
+          activity: "Drinks",
+          payees: ["Louis"],
+          amount: -20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Louis"],
+          amount: 10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Louis", "Nemo"],
+          amount: 10
+        }
+      ],
+      "Luther" => [
+        {
+          activity: "Brunch",
+          payees: ["Maria"],
+          amount: -10
+        },
+        {
+          activity: "Drinks",
+          payees: ["Louis"],
+          amount: -20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Louis"],
+          amount: 10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Louis", "Nemo"],
+          amount: 10
+        }
+      ],
+      "Louis" => [
+        {
+          activity: "Drinks",
+          payees: ["Maria", "Luther"],
+          amount: 20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        }
+      ],
+      "Nemo" => [
+        {
+          activity: "Jet Skiing",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        }
+      ]
+    }
+    assert_equal expected, result
   end
 end
