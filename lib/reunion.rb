@@ -53,13 +53,15 @@ class Reunion
   end
 
   def participants_and_activities
-    names = activities.map do |activity|
-      activity.participants.keys
-    end.flatten.uniq
-
-    names.reduce({}) do |participants, name|
+    participant_names.reduce({}) do |participants, name|
       participants[name] = []
       participants
     end
+  end
+
+  def participant_names
+    activities.map do |activity|
+      activity.participants.keys
+    end.flatten.uniq
   end
 end
