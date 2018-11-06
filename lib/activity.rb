@@ -1,34 +1,18 @@
+require 'pry'
+class Activity
+  attr_reader :name, :participants
 
+  def initialize(name)
+    @name = name
+    @participants = Hash.new(0)
+  end
 
+  def add_participant(name, amount_paid)
+    @participants[name] = amount_paid
+  end
 
+  def total_cost
+    @participants.values.sum
+  end
 
-
-
-
-
-# ```ruby
-# pry(main)> require './lib/activity'
-# # => true
-#
-# pry(main)> activity = Activity.new("Brunch")
-# # => #<Activity:0x007fe4ca1df568 ...>
-#
-# pry(main)> activity.name
-# # => "Brunch"
-#
-# pry(main)> activity.participants
-# # => {}
-#
-# pry(main)> activity.add_participant("Maria", 20)
-#
-# pry(main)> activity.participants
-# # => {"Maria" => 20}
-#
-# pry(main)> activity.total_cost
-# # => 20
-#
-# pry(main)> activity.add_participant("Luther", 40)
-#
-# pry(main)> activity.participants
-# # => {"Maria" => 20, "Luther" => 40}
-# ```
+end
