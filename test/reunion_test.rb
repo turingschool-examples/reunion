@@ -14,12 +14,12 @@ class ReunionTest < Minitest::Test
     @reunion.add_activity(activity_1)
 
 
-    activity_2 = Activity.new("Drinks")
-    activity_2.add_participant("Maria", 60)
-    activity_2.add_participant("Luther", 60)
-    activity_2.add_participant("Louis", 0)
+    @activity_2 = Activity.new("Drinks")
+    @activity_2.add_participant("Maria", 60)
+    @activity_2.add_participant("Luther", 60)
+    @activity_2.add_participant("Louis", 0)
 
-    @reunion.add_activity(activity_2)
+    @reunion.add_activity(@activity_2)
 
     activity_3 = Activity.new("Bowling")
     activity_3.add_participant("Maria", 0)
@@ -28,13 +28,13 @@ class ReunionTest < Minitest::Test
 
     @reunion.add_activity(activity_3)
 
-    activity_4 = Activity.new("Jet Skiing")
-    activity_4.add_participant("Maria", 0)
-    activity_4.add_participant("Luther", 0)
-    activity_4.add_participant("Louis", 40)
-    activity_4.add_participant("Nemo", 40)
+    @activity_4 = Activity.new("Jet Skiing")
+    @activity_4.add_participant("Maria", 0)
+    @activity_4.add_participant("Luther", 0)
+    @activity_4.add_participant("Louis", 40)
+    @activity_4.add_participant("Nemo", 40)
 
-    @reunion.add_activity(activity_4)
+    @reunion.add_activity(@activity_4)
   end
 
   def setup_two_activities
@@ -88,6 +88,17 @@ class ReunionTest < Minitest::Test
   def test_summary_returns_breakout_as_a_string
     setup_two_activities
     assert_equal "Maria: -10\nLuther: -30\nLouis: 40", @reunion.summary
+  end
+
+  def test_all_participants_returns_all_participants
+    setup_complex_reunion
+    assert_equal ["Maria", "Luther", "Louis", "Nemo"], @reunion.all_participants
+  end
+
+  def test_get_payees_returns_payees
+    setup_complex_reunion
+    assert_equal ["Louis", "Nemo"], @reunion.get_payees(@activity_4, 'Maria')
+    assert_equal ["Louis"], @reunion.get_payees(@activity_2, 'Luther')
   end
 
   def test_detailed_breakout_of_participant
