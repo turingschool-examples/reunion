@@ -13,10 +13,9 @@ class Activity
   end
 
   def total_cost
-    # @participants.find do |person, cost|
-    #   cost
-    # end.sum
-    @participants.values.first
+    @participants.map do |person,paid|
+        paid
+    end.flatten.sum
   end
 
 end
