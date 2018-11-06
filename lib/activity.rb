@@ -1,3 +1,4 @@
+require 'pry'
 class Activity
   attr_reader :name, :participants
   def initialize(name)
@@ -16,5 +17,16 @@ class Activity
   def split
     total_cost / @participants.count
   end
+
+  def owed
+    owed = Hash.new
+    @participants.map do |person, cost|
+      tally = split - cost
+      owed[person] = tally
+    end
+    owed
+  end
+
+  
 
 end

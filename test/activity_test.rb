@@ -38,4 +38,13 @@ class ActivityTest < MiniTest::Test
 
     assert_equal 30, act.split
   end
+
+  def test_it_can_calculate_owed_amounts
+    act = Activity.new("Stuff")
+    act.add_participant("maria", 20)
+    act.add_participant("luther", 40)
+    owed = {'maria' => 10, 'luther' => -10}
+
+    assert_equal owed, act.owed
+  end
 end
