@@ -28,5 +28,13 @@ class Reunion
     final_owed
   end
 
+  def summary
+    summaries = []
+    breakout.each do |person, money|
+      summaries <<  "#{person}: #{money}\n"
+    end
+    summaries.join.chomp
+  end
+
 
 end
