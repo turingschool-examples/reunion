@@ -14,4 +14,16 @@ class Activity
       payment
     end.sum
   end
+
+  def split
+    total_cost / @participants.count
+  end
+
+  def owed
+    split_value = split
+    new_hash = @participants.each do |name, payment|
+      @participants[name] = (payment - split_value) * -1
+    end
+    new_hash
+  end
 end
