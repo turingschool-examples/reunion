@@ -22,7 +22,7 @@ class Activity
 
   def owed
     new_charge = {}
-    @participants.map do |key, value|
+    @participants.each do |key, value|
       amount_owed = (split - value)
       new_charge[key] = amount_owed
     end
