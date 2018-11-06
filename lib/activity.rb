@@ -22,11 +22,43 @@ class Activity
   end
 
   def split
-    total_cost / participants.length
+    total_cost / total_people
+  end
+
+  def total_people
+    participants.length
   end
 
   def owed
     participants.map { |person, paid| [person, split - paid] }.to_h
   end
 
+  def owed_to
+    detailed_breakout = {}
+    participants.each do |person, paid|
+      unless find_people_who_owe(person).length == 0
+        owed_amount = owed[person] / find_people_who_owe(person).length
+      else
+        owed_amount = 0
+      end
+      detailed_breakout[person] = {activity: @name,
+          payees: find_people_who_owe(person), amount: owed_amount}
+    end
+    detailed_breakout
+  end
+
+  def find_people_who_owe(person)
+    if owed[person] < 0
+      people =  participants.find_all do |other_person, paid|
+        owed[other_person] > 0
+      end
+    elsif owed[person] > 0
+      people =  participants.find_all do |other_person, paid|
+        owed[other_person] < 0
+      end
+    else
+      return []
+    end
+    people.map { |name, amount| name }
+  end
 end
