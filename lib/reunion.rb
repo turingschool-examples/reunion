@@ -37,7 +37,13 @@ class Reunion
   end
 
   def detailed_breakout
-    
+
+  end
+
+  def activities_by_person(person)
+    @activities.find_all do |activity|
+      activity.participants.include?(person)
+    end
   end
 
 

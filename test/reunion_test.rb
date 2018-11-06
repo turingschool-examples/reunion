@@ -71,6 +71,7 @@ class ReunionTest < Minitest::Test
   end
 
   def test_it_can_give_a_detailed_breakout
+    skip
     @activity_1.add_participant("Maria", 20)
     @activity_1.add_participant("Luther", 40)
     @reunion.add_activity(@activity_1)
@@ -176,13 +177,11 @@ class ReunionTest < Minitest::Test
   def test_it_can_track_peoples_activities
     @activity_1.add_participant("Maria", 20)
     @activity_1.add_participant("Luther", 40)
-    @reunion.add_activity(@activity_1)
 
     @activity_2 = Activity.new("Drinks")
     @activity_2.add_participant("Maria", 60)
     @activity_2.add_participant("Luther", 60)
     @activity_2.add_participant("Louis", 0)
-    @reunion.add_activity(@activity_2)
 
     @activity_3 = Activity.new("Bowling")
     @activity_3.add_participant("Maria", 0)
@@ -200,7 +199,7 @@ class ReunionTest < Minitest::Test
     @reunion.add_activity(@activity_3)
     @reunion.add_activity(@activity_4)
 
-    assert_equal ["Brunch", "Drinks", "Bowling", "Jet Skiing"], @reunion.activities["Maria"]
+    assert_equal [@activity_1, @activity_2, @activity_3, @activity_4], @reunion.activities_by_person("Maria")
   end
 
 end
