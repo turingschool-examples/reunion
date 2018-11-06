@@ -27,4 +27,14 @@ class ReunionTest < Minitest::Test
     assert_equal [activity_1], reunion.activities
   end
 
+  def test_it_can_add_participants_to_the_activities_of_reunion
+    reunion = Reunion.new("1406 BE")
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+    reunion.add_activity(activity_1)
+
+    assert_equal 60, reunion.total_cost
+  end
+
 end
