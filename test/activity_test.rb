@@ -24,10 +24,11 @@ class ActivityTest < Minitest::Test
     assert_equal 0, @activity.participants.count
 
     @activity.add_participant("Maria", 20)
+    @activity.add_participant("Luther", 40)
 
-    expected = { "Maria" => 20 }
+    expected = { "Maria" => 20, "Luther" => 40 }
 
-    assert_equal 1, @activity.participants.count
+    assert_equal 2, @activity.participants.count
     assert_equal expected, @activity.participants
   end
 
@@ -35,7 +36,7 @@ class ActivityTest < Minitest::Test
     assert_equal 0, @activity.total_cost
 
     @activity.add_participant("Maria", 20)
-    @activity.add_participant("Dave", 40)
+    @activity.add_participant("Luther", 40)
 
     assert_equal 60, @activity.total_cost
   end
