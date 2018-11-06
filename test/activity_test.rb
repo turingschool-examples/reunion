@@ -27,4 +27,8 @@ class ActivityTest < Minitest::Test
     assert_equal expected, @activity.participants
   end
 
+  def test_it_has_total_cost
+    @activity.add_participant("Maria", 20)
+    assert_equal 20, @activity.total_cost
+  end
 end

@@ -8,7 +8,15 @@ class Activity
     @participants = Hash.new(0)
   end
 
-  def add_participant(name, total_cost)
-    @participants[name] += total_cost
+  def add_participant(name, paid)
+    @participants[name] += paid
   end
+
+  def total_cost
+    # @participants.find do |person, cost|
+    #   cost
+    # end.sum
+    @participants.values.first
+  end
+
 end
