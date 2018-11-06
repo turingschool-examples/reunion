@@ -20,13 +20,13 @@ class Reunion
   end
 
   def breakout
-    hash = Hash.new(0)
+    breakout_hash = Hash.new(0)
     @activities.each do |activity|
       activity.owed.each do |key, value|
-        hash[key] += value
+        breakout_hash[key] += value
       end
     end
-    hash
+    breakout_hash
   end
 
   def summary
@@ -35,5 +35,8 @@ class Reunion
       summary_string << "#{key}: #{value}\n"
     end
     summary_string.chomp
+  end
+
+  def detailed_breakout
   end
 end

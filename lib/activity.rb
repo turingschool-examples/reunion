@@ -24,10 +24,10 @@ class Activity
   end
 
   def owed
-    hash = Hash.new(0)
+    owed_hash = Hash.new(0)
     @participants.each do |key, value|
-      hash[key] = (split - value)
+      owed_hash[key] = (split - value)
     end
-    hash
+    owed_hash
   end
 end
