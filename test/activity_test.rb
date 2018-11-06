@@ -26,7 +26,8 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_has_total_cost
-    skip
+    @activity.add_participant("Maria", 20)
+
     assert_equal 20, @activity.total_cost
   end
 
