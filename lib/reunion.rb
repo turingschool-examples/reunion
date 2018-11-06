@@ -29,4 +29,18 @@ class Reunion
       |output, (person, cost)| output + "#{person}: #{cost}\n"
     end.chomp
   end
+
+  def detailed_breakout
+    total_participants = participants
+    total_participants.inject({}) do |breakout, name|
+      breakout[name] = list_detailed_info(name)
+    end
+  end
+
+  def participants
+    participants = @activities.inject([]) do |total_participants, activity|
+      total_participants << activity.participants.keys
+    end
+    participants.flatten.uniq
+  end
 end

@@ -256,6 +256,6 @@ class ReunionTest < Minitest::Test
       }
     ]
 
-    assert_equal expected_
+    assert_equal expected, @reunion.list_detailed_info("Maria")
   end
 end
