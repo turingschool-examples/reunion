@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require 'mintest/pride'
+require 'minitest/pride'
 require './lib/activity'
 
 class ActivityTest < Minitest::Test
@@ -24,6 +24,7 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_add_participants
+    skip
     activity = Activity.new("brunch")
     activity.add_particpant("Maria" => 20)
 
@@ -31,6 +32,7 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_tracks_total_cost
+    skip
     activity = Activity.new("brunch")
     activity.add_particpant("Maria" => 20)
     activity.add_particpant("Luther" => 40)
