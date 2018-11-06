@@ -114,8 +114,78 @@ class ReunionTest < Minitest::Test
     reunion.add_activity(activity_2)
     reunion.add_activity(activity_3)
     reunion.add_activity(activity_4)
-    reunion.detailed_breakout
 
+    assert_equal ({
+  "Maria" => [
+    {
+      activity: "Brunch",
+      payees: ["Luther"],
+      amount: 10
+    },
+    {
+      activity: "Drinks",
+      payees: ["Louis"],
+      amount: -20
+    },
+    {
+      activity: "Bowling",
+      payees: ["Louis"],
+      amount: 10
+    },
+    {
+      activity: "Jet Skiing",
+      payees: ["Louis", "Nemo"],
+      amount: 10
+    }
+  ],
+  "Luther" => [
+    {
+      activity: "Brunch",
+      payees: ["Maria"],
+      amount: -10
+    },
+    {
+      activity: "Drinks",
+      payees: ["Louis"],
+      amount: -20
+    },
+    {
+      activity: "Bowling",
+      payees: ["Louis"],
+      amount: 10
+    },
+    {
+      activity: "Jet Skiing",
+      payees: ["Louis", "Nemo"],
+      amount: 10
+    }
+  ],
+  "Louis" => [
+    {
+      activity: "Drinks",
+      payees: ["Maria", "Luther"],
+      amount: 20
+    },
+    {
+      activity: "Bowling",
+      payees: ["Maria", "Luther"],
+      amount: -10
+    },
+    {
+      activity: "Jet Skiing",
+      payees: ["Maria", "Luther"],
+      amount: -10
+    }
+  ],
+  "Nemo" => [
+    {
+      activity: "Jet Skiing",
+      payees: ["Maria", "Luther"],
+      amount: -10
+    }
+  ]
+}), reunion.detailed_breakout
+# not scaleable. also not surprised. LOL.
   end
 
 
