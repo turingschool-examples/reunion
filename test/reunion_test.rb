@@ -75,6 +75,7 @@ class ReunionTest < Minitest::Test
   end
 
   def test_it_can_produce_string_sumary_of_the_breakout_properly_formated
+    skip
     reunion = Reunion.new("1406 BE")
     activity_1 = Activity.new("Brunch")
     activity_1.add_participant("Maria", 20)
