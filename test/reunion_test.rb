@@ -71,4 +71,18 @@ class ReunionTest < Minitest::Test
     expected = "Maria: -10\nLuther: -30\nLouis: 40"
     assert_equal expected, reunion.summary
   end
+
+  def test_summary_puts_output
+    reunion = Reunion.new("1406 BE")
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+    activity_2 = Activity.new("Drinks")
+    activity_2.add_participant("Maria", 60)
+    activity_2.add_participant("Luther", 60)
+    activity_2.add_participant("Louis", 0)
+    reunion.add_activity(activity_1)
+    reunion.add_activity(activity_2)
+    assert_output (/Maria: -10\nLuther: -30\nLouis: 40/) { puts reunion.summary }
+  end
 end
