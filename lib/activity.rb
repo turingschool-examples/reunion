@@ -11,9 +11,7 @@ class Activity
   end
 
   def total_cost
-    @participants.sum do |k, v|
-      v
-    end
+    @participants.values.sum
   end
 
   def split
@@ -21,8 +19,6 @@ class Activity
   end
 
   def owed
-    @participants.transform_values do |v|
-      split - v
-    end
+    @participants.transform_values { |v| split - v }
   end
 end
