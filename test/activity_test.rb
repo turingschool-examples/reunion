@@ -59,10 +59,6 @@ class ActivityTest < Minitest::Test
     activity.add_participant("Luther", 40)
     activity.total_cost
     split_cost = activity.split
-    # binding.pry
-    # activity.charge("Maria", split_cost)
-    # activity.charge("Luther", split_cost)
-
 
     assert_equal ({"Maria" => 10, "Luther" => -10}), activity.owed
   end
