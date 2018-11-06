@@ -48,4 +48,13 @@ class ActivityTest < Minitest::Test
     assert_equal 60, @activity.total_cost
     assert_equal 30, @activity.split
   end
+
+  def test_it_can_show_what_is_owed
+    @activity.add_participant("Maria", 20)
+    @activity.add_participant("Luther", 40)
+
+    expected = {"Maria" => 10, "Luther" => -10}
+
+    assert_equal expected, @activity.owed
+  end
 end
