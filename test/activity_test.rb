@@ -23,15 +23,26 @@ class ActivityTest < Minitest::Test
     assert_equal ({}), activity.participants
   end
 
+  def test_it_can_add_a_participant
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    assert_equal ({"Maria" => 20}), activity.participants
+  end
+
+  def test_it_can_add_start_with_zero_cost
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    assert_equal 20, activity.total_cost
+  end
+
+
+
+
+
 end
 
 
 
-# pry(main)> activity.add_participant("Maria", 20)
-#
-# pry(main)> activity.participants
-# # => {"Maria" => 20}
-#
 # pry(main)> activity.total_cost
 # # => 20
 #
