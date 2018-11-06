@@ -107,24 +107,20 @@ class ReunionTest < Minitest::Test
   def test_a_reunion_can_create_a_detailed_breakout
     reunion = Reunion.new("1406 BE")
 
-    # One person owes one person
     activity_1 = Activity.new("Brunch")
     activity_1.add_participant("Maria", 20)
     activity_1.add_participant("Luther", 40)
 
-    # One person owes two people
     activity_2 = Activity.new("Drinks")
     activity_2.add_participant("Maria", 60)
     activity_2.add_participant("Luther", 60)
     activity_2.add_participant("Louis", 0)
 
-    # Two people owe one person
     activity_3 = Activity.new("Bowling")
     activity_3.add_participant("Maria", 0)
     activity_3.add_participant("Luther", 0)
     activity_3.add_participant("Louis", 30)
 
-    # Two people owe two people
     activity_4 = Activity.new("Jet Skiing")
     activity_4.add_participant("Maria", 0)
     activity_4.add_participant("Luther", 0)
@@ -206,6 +202,7 @@ class ReunionTest < Minitest::Test
          }
        ]
      }
+    assert_equal ["Maria", "Luther", "Louis", "Nemo"], reunion.participant_names
     assert_equal expected, reunion.detailed_breakout
   end
 end
