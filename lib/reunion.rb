@@ -26,4 +26,13 @@ class Reunion
     end
     final_breakout
   end
+
+  def summary
+    breakout_collection = breakout
+    final_summary = []
+    breakout_collection.each do |pair|
+      final_summary << "#{pair[0]}: #{pair[1]}"
+    end
+    final_summary.join("\n")
+  end
 end
