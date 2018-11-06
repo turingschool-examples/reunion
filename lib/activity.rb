@@ -8,4 +8,12 @@ class Activity
     @participants = {}
   end
   
+  def add_participant(name, paid)
+    @participants[name] = paid
+  end
+  
+  def total_cost
+    @participants.values.sum
+  end
+  
 end

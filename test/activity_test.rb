@@ -18,6 +18,19 @@ class ActivityTest < Minitest::Test
     assert_equal ({}), activity.participants
   end
   
+  def test_it_can_add_participants
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    assert_equal ({"Maria" => 20}), activity.participants
+    activity.add_participant("Luther", 40)
+    assert_equal ({"Maria" => 20, "Luther" => 40}), activity.participants
+  end
+  
+  def test_it_can_calculate_total_cost_of_activity
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    assert_equal 20, activity.total_cost
+  end
   
 end
 
