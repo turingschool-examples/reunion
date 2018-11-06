@@ -23,4 +23,10 @@ class Reunion
       total
     end
   end
+
+  def summary
+    breakout.inject("") do
+      |output, (person, cost)| output + "#{person}: #{cost}\n"
+    end.chomp
+  end
 end
