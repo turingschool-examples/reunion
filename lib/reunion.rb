@@ -24,7 +24,7 @@ class Reunion
   def breakout
     breakout_hash = Hash.new(0)
     breakout_array.map do |totals|
-      totals.each do |key, value|
+      totals.map do |key, value|
         if breakout_hash.keys.include?(key)
           breakout_hash[key] += (value * -1)
         else
@@ -40,4 +40,14 @@ class Reunion
       "#{k}: #{v * -1}\n"
     end.join('').chomp("\n")
   end
+
+  # def add_details(activity)
+  #   detailed = Hash.new(0)
+  #   @activities.each do |activity|
+  #   detailed[activity.participants] = activity
+  # end
+
+  # def detailed_breakout
+  #
+  # end
 end
