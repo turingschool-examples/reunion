@@ -12,18 +12,15 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_has_name
-    skip
     assert_equal "Brunch", @activity.name
   end
 
   def test_it_has_participants
-    skip
     assert_equal ({}), @activity.participants
   end
 
   def test_it_can_add_participants
-    skip
-    activity.add_participant("Maria", 20)
+    @activity.add_participant("Maria", 20)
 
     assert_equal ({"Maria" => 20}), @activity.participants
   end
