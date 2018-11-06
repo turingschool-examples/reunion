@@ -52,14 +52,25 @@ class ActivityTest < Minitest::Test
     activity_1 = Activity.new("Brunch")
     activity_1.add_participant("Maria", 20)
     activity_1.add_participant("Luther", 40)
-    expected = ({"Maria" => {activity: "Brunch", payees: "Luther", amount: 10}})
-    assert_equal expected, activity_1.payees_breakout("Maria")
+    expected = ({"Maria" => {activity: "Brunch", payees: "Luther", amount: 10}, "Luther" => {activity: "Brunch", payees: "Maria", amount: -10}})
+    assert_equal expected, activity_1.payees_breakout
     
     activity_2 = Activity.new("Drinks")
     activity_2.add_participant("Maria", 60)
     activity_2.add_participant("Luther", 60)
     activity_2.add_participant("Louis", 0)
-    expected = ({"Luther" => {activity: "Drinks", payees: ["Maria", "Louis"], amount: 30}})
+    expected = ({"Maria" => {activity: "Drinks", payees: "Louis", amount: -20}, "Luther" => {activity: "Drinks", payees: "Louis", amount: -20}, "Louis" => {activity: "Drinks", payees: ["Maria", "Louis"], amount: 20}})
+    assert_equal expected, activity_2.payees_breakout
+  end
+  
+  def test_it_can_find_list_of_payees
+    activity = Activity.new("Drinks")
+    activity.add_participant("Maria", 60)
+    activity.add_participant("Luther", 60)
+    activity.add_participant("Louis", 0)
+    assert_equal "Louis", activity.payees("Maria")
+    assert_equal "Louis", activity.payees("Luther")
+    assert_equal ["Maria", "Luther"], activity.payees("Louis")
   end
   
 end

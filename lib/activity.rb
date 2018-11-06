@@ -27,4 +27,27 @@ class Activity
     end
     participants_owe
   end
+  
+  def payees(name)
+    payees = []
+    if @participants[name] < split
+      @participants.each do |participant, amount|
+        payees << participant if amount >= split
+      end 
+    else
+      @participants.each do |participant, amount|
+        payees << participant if amount < split
+      end
+    end
+    # payees.count == 1 ? payees.first : payees
+    payees
+  end
+  
+  def payees_breakout
+    breakout = {}
+    owed.each do |name, amount|
+      breakout[name] = {activity: @name, payees: payees(name) , amount: amount / payees(name).count}
+    end
+    breakout
+  end
 end
