@@ -27,4 +27,10 @@ class Reunion
     end
     hash
   end
+
+  def summary
+    breakout.map do |key, value|
+      "#{key}: #{value}\n"
+    end.join.chomp
+  end
 end
