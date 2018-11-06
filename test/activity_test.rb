@@ -50,10 +50,15 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_can_calculate_total_owed_per_participant
-    split
     @activity.add_participant("Maria", 20)
     @activity.add_participant("Luther", 40)
     assert_equal ({"Maria" => 10, "Luther" => -10}), @activity.owed
+  end
+
+  def test_it_calculates_owed_by_participant
+    @activity.add_participant("Maria", 20)
+    @activity.add_participant("Luther", 40)
+    assert_equal 10, @activity.owed_by_participant("Maria")
   end
 
 end
