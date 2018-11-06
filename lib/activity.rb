@@ -6,8 +6,8 @@ class Activity
     @participants = {}
   end
 
-  def add_particpant(participant)
-    @participants.merge!(participant)
+  def add_participant(name, cost)
+    @participants[name] = cost
   end
 
   def total_cost
