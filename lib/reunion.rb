@@ -40,14 +40,4 @@ class Reunion
       "#{k}: #{v * -1}\n"
     end.join('').chomp("\n")
   end
-
-  # def add_details(activity)
-  #   detailed = Hash.new(0)
-  #   @activities.each do |activity|
-  #   detailed[activity.participants] = activity
-  # end
-
-  # def detailed_breakout
-  #
-  # end
 end
