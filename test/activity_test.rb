@@ -39,4 +39,11 @@ class ActivityTest < Minitest::Test
     expected = {"Maria" => 20, "Luther" => 40}
     assert_equal expected, activity.participants
   end
+
+  def test_it_can_split_cost
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
+    assert_equal 30 , activity.split
+  end 
 end
