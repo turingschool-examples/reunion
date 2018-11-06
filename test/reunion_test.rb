@@ -27,4 +27,21 @@ class ReunionTest < Minitest::Test
     assert_equal 1, @reunion.activities.count
     assert_equal activity_1, @reunion.activities.last
   end
+
+  def test_it_can_give_total_cost_of_all_activities
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+    @reunion.add_activity(activity_1)
+
+    assert_equal 60, @reunion.total_cost
+
+    activity_2 = Activity.new("Drinks")
+    activity_2.add_participant("Maria", 60)
+    activity_2.add_participant("Luther", 60)
+    activity_2.add_participant("Louis", 0)
+    @reunion.add_activity(activity_2)
+
+    assert_equal 180, @reunion.total_cost
+  end
 end
