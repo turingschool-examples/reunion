@@ -128,6 +128,7 @@ class ReunionTest < Minitest::Test
   end
 
   def test_it_can_git_a_detailed_breakout_when_two_people_owe_one_person
+    skip
     reunion = Reunion.new("1406 BE")
 
     activity_3 = Activity.new("Bowling")
@@ -146,6 +147,7 @@ class ReunionTest < Minitest::Test
   end
 
   def test_it_can_return_a_detailed_breakout_when_two_people_owe_two_people
+    skip
     reunion = Reunion.new("1406 BE")
 
     activity_4 = Activity.new("Jet Skiing")
@@ -168,6 +170,7 @@ class ReunionTest < Minitest::Test
   end
 
   def test_it_can_give_a_detailed_breakout_for_the_whole_reunion
+    skip
     reunion = Reunion.new("1406 BE")
 
     activity_1 = Activity.new("Brunch")

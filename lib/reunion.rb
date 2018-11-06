@@ -1,9 +1,10 @@
 require 'pry'
 class Reunion
-  attr_reader :name, :activities
+  attr_reader :name, :activities, :detailed_hash
   def initialize(name)
     @name = name
     @activities = []
+    @detailed_hash = {:activity => "", :payees => [], :amount => 0}
   end
 
   def add_activity(activity)
@@ -39,5 +40,36 @@ class Reunion
     end
     printed.join.chomp
   end
+
+  def activity_breakout(activity)
+    activity.owed.select do |name, owed|
+      if owed.negative?
+      @detailed_hash[:activity] = activity.name
+      @detailed_hash[:payees] << name
+      @detailed_hash[:amount] =+ owed.abs
+      end
+     end
+     detailed_hash
+  end
+
+  def mini_breakout
+    @activities.each do |activity|
+      activity_breakout(activity)
+    end
+    detailed_hash
+  end
+
+  def detailed_breakout
+    hash = {}
+    @activities.each do |activity|
+      activity.owed.select do |name, owed|
+      if owed.negative? == false
+        hash[name] = [mini_breakout]
+      end
+    end
+    end
+    hash
+  end
+
 
 end
