@@ -7,4 +7,8 @@ class Reunion
     @name       = name
     @activities = []
   end
+
+  def add_activity(activity_object)
+    @activities << activity_object
+  end
 end

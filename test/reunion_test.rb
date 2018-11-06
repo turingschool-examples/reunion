@@ -26,10 +26,22 @@ class ReunionTest < Minitest:: Test
     activity_1 = Activity.new("Brunch")
     reunion.add_activity(activity_1)
 
-    expected = activity_1
+    expected = [activity_1]
     actual   = reunion.activities
     assert_equal expected, actual
   end
+
+  def test_it_knows_total_cost_for_one_activity
+    reunion = Reunion.new("1406 BE")
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+    reunion.add_activity(activity_1)
+
+    assert_equal 60, reunion.total_cost
+  end
+
+  
 
 
 end
