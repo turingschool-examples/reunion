@@ -11,6 +11,25 @@ class Reunion
     @activities << activity
   end
 
+  def total_cost
+   @activities.sum do |activity|
+      activity.total_cost
+    end
+  end
+
+  def breakout
+    # date_offset.inject({}) do |total_offset,(key, value)|
+    #   total_offset[key] = key_offset[key] + value
+    #   total_offset
+    # end
+    @activities.map do |activity|
+     activity.owed.inject({}) do |total_owed, (key, value)|
+       total_owed[key]
+       binding.pry
+      end
+    end
+  end
+
 end
 
 
