@@ -27,4 +27,6 @@ class Reunion
     end
     final_owed
   end
+
+
 end
