@@ -204,7 +204,7 @@ class ReunionTest < Minitest::Test
     @reunion.add_activity(activity_3)
     @reunion.add_activity(activity_4)
 
-    assert_equal [], @reunion.participants
+    assert_equal ["Maria", "Luther", "Louis", "Nemo"], @reunion.participants
   end
 
   def test_it_can_list_detailed_info

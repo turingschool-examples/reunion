@@ -43,4 +43,17 @@ class Reunion
     end
     participants.flatten.uniq
   end
+
+  def list_detailed_info(name)
+    @activities.map do |activity|
+      owed = activity.owed[name]
+      payees = activity.find_payees(name)
+      {
+        activity: activity.name,
+        payees: payees,
+        amount: owed / payees.count
+      }
+    end
+  end
+
 end
