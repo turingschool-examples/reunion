@@ -50,6 +50,14 @@ class ActivityTest < Minitest::Test
     assert_equal expected, activity.participants
   end
 
+  def test_it_can_count_the_total_participants
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
+
+    assert_equal 2, activity.total_participants
+  end
+
   def test_that_the_total_cost_can_be_split
     activity = Activity.new("Brunch")
     activity.add_participant("Maria", 20)
@@ -60,6 +68,7 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_can_calculate_the_amount_owed_by_each_participant_and_return_a_hash
+    skip
     activity = Activity.new("Brunch")
     activity.add_participant("Maria", 20)
     activity.add_participant("Luther", 40)
