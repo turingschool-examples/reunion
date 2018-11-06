@@ -48,6 +48,20 @@ class ActivityTest < Minitest::Test
     assert_equal ({"Maria" => 10, "Luther" => -10}), activity.owed
   end
   
+  def test_it_can_calculate_payees_breakout
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+    expected = ({"Maria" => {activity: "Brunch", payees: "Luther", amount: 10}})
+    assert_equal expected, activity_1.payees_breakout("Maria")
+    
+    activity_2 = Activity.new("Drinks")
+    activity_2.add_participant("Maria", 60)
+    activity_2.add_participant("Luther", 60)
+    activity_2.add_participant("Louis", 0)
+    expected = ({"Luther" => {activity: "Drinks", payees: ["Maria", "Louis"], amount: 30}})
+  end
+  
 end
 
 # pry(main)> activity = Activity.new("Brunch")

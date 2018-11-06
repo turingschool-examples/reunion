@@ -72,6 +72,7 @@ class ReunionTest < Minitest::Test
     expected = "Maria: -10\nLuther: -30\nLouis: 40"
     assert_equal expected, reunion.summary
   end
+
 end
 
 # pry(main)> reunion.breakout
