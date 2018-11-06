@@ -40,4 +40,9 @@ class ReunionTest < Minitest::Test
     assert_equal 180, @reunion.total_cost
   end
 
+  def test_it_can_breakout_total_cost_per_person
+    expected = ({"Maria" => -10, "Luther" => -30, "Louis" => 40})
+    assert_equal expected, @reunion.breakout
+  end
+
 end
