@@ -6,4 +6,8 @@ class Activity
     @participants = {}
   end
 
+  def add_particpant(participant)
+    @participants.merge!(participant)
+  end
+
 end
