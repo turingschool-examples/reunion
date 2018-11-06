@@ -4,7 +4,7 @@ class Activity
 
   def initialize(name)
     @name         = name
-    @participants = Hash.new
+    @participants = Hash.new(0)
   end
 
   def add_participant(participant, total_cost)
@@ -28,6 +28,7 @@ class Activity
   def owed
     new_list = Hash.new(0)
     @participants.each do |key, value|
+      new_list[key] += split - value
     end
     new_list
   end
