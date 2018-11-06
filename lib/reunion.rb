@@ -18,4 +18,10 @@ attr_reader :name, :activities
     end
   end
 
+  def breakout
+    payment = @activities.group_by do |activity|
+      activity.owed#(participants[:name])
+    end
+    payment
+  end
 end
