@@ -35,5 +35,9 @@ class Reunion
     breakout_hash
   end
 
-
+  def summary
+    breakout.map do |k, v|
+      "#{k}: #{v * -1}\n"
+    end.join('').chomp("\n")
+  end
 end
