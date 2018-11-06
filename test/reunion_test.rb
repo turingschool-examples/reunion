@@ -25,6 +25,4 @@ class ReunionTest < Minitest::Test
     assert_equal [@activity], @reunion.add_activity(@activity)
   end
 
-
-
 end
