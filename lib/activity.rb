@@ -32,4 +32,10 @@ class Activity
     end
     new_list
   end
+
+  def patty_names
+    @participants.map do |participant|
+      participant[0]
+    end
+  end
 end

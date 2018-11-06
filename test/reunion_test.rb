@@ -77,4 +77,38 @@ class ReunionTest < Minitest::Test
     expected = "Maria: -10\nLuther: -30\nLouis: 40\n"
     assert_equal expected, reunion.summary
   end
+
+  def test_it_can_show_detailed_breakout_for_one_activity
+    reunion = Reunion.new("1406 BE")
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+    reunion.add_activity(activity_1)
+
+    expected = {"Maria" => [{activity: "Brunch",
+                            payees:   ["Luther"],
+                            amount:   10}]}
+    assert_equal expected, reunion.detailed_breakout
+  end
+
+  def test_interestingly_lets_try_two
+    reunion = Reunion.new("1406 BE")
+    activity_1 = Activity.new("Brunch")
+    activity_2 = Activity.new("Drinks")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+    activity_2.add_participant("Maria", 60)
+    activity_2.add_participant("Luther", 60)
+    activity_2.add_participant("Louis", 0)
+    reunion.add_activity(activity_1)
+    reunion.add_activity(activity_2)
+
+    expected = {"Maria" => [{activity: "Brunch",
+                            payees:   ["Luther"],
+                            amount:   10},
+                            {activity: "Drinks",
+                            payees: ["Louis"],
+                            amount: -20}]}
+    assert_equal expected, reunion.detailed_breakout
+  end
 end

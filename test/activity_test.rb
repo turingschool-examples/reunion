@@ -50,4 +50,15 @@ class ActivityTest < Minitest::Test
     expected = {"Maria" => 10, "Luther" => -10}
     assert_equal expected, activity.owed
   end
+
+  def test_it_can_return_a_participants_name
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
+    activity.add_participant("Mark", 1)
+    activity.add_participant("Luke", 50)
+    activity.add_participant("John", 40)
+    expected = ['Maria', 'Luther', 'Mark', 'Luke', 'John']
+    assert_equal expected, activity.patty_names
+  end
 end
