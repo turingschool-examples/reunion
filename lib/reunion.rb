@@ -37,5 +37,19 @@ class Reunion
   end
 
 
+  def summary
+    full_string = ""
+    loop_counter = 0
+    breakout.each do |participant, amount_owed|
+      loop_counter += 1
+      
+        if breakout.keys.count > loop_counter
+          full_string += "#{participant}: #{amount_owed}\n"
+        else
+          full_string += "#{participant}: #{amount_owed}"
+        end
+    end
+    full_string
+  end
 
 end
