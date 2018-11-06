@@ -14,7 +14,7 @@ class Reunion
   end
 
   def breakout
-    @activities.reduce(Hash.new(0)) do |rslt, activity|
+    @activities.reduce({}) do |rslt, activity|
       rslt.merge(activity.owed) do |key, oldval, newval|
         oldval + newval
       end
@@ -27,5 +27,23 @@ class Reunion
     end.join("\n")
   end
 
+  def detailed_breakout_of_participant(name)
+    @activities.reduce([]) do |rslt, activity|
+      payees = activity.participants.reject do |k, v|
+        v == activity.participants[name]
+      end.keys
+      rslt << {
+        activity: activity.name,
+        payees: payees,
+        amount: activity.owed[name] / payees.size
+      }
+    end
+  end
 
-end
+    def detailed_breakout
+      @activities.reduce({}) do |rslt, activity|
+      end
+    end
+
+
+  end

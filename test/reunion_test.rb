@@ -6,6 +6,37 @@ class ReunionTest < Minitest::Test
     @reunion = Reunion.new("1406 BE")
   end
 
+  def setup_complex_reunion
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+
+    @reunion.add_activity(activity_1)
+
+
+    activity_2 = Activity.new("Drinks")
+    activity_2.add_participant("Maria", 60)
+    activity_2.add_participant("Luther", 60)
+    activity_2.add_participant("Louis", 0)
+
+    @reunion.add_activity(activity_2)
+
+    activity_3 = Activity.new("Bowling")
+    activity_3.add_participant("Maria", 0)
+    activity_3.add_participant("Luther", 0)
+    activity_3.add_participant("Louis", 30)
+
+    @reunion.add_activity(activity_3)
+
+    activity_4 = Activity.new("Jet Skiing")
+    activity_4.add_participant("Maria", 0)
+    activity_4.add_participant("Luther", 0)
+    activity_4.add_participant("Louis", 40)
+    activity_4.add_participant("Nemo", 40)
+
+    @reunion.add_activity(activity_4)
+  end
+
   def setup_two_activities
     activity_1 = Activity.new("Brunch")
     activity_1.add_participant("Maria", 20)
@@ -59,41 +90,113 @@ class ReunionTest < Minitest::Test
     assert_equal "Maria: -10\nLuther: -30\nLouis: 40", @reunion.summary
   end
 
+  def test_detailed_breakout_of_participant
+    setup_complex_reunion
 
+    expected = [
+      {
+        activity: "Brunch",
+        payees: ["Luther"],
+        amount: 10
+      },
+      {
+        activity: "Drinks",
+        payees: ["Louis"],
+        amount: -20
+      },
+      {
+        activity: "Bowling",
+        payees: ["Louis"],
+        amount: 10
+      },
+      {
+        activity: "Jet Skiing",
+        payees: ["Louis", "Nemo"],
+        amount: 10
+      }
+    ]
+    require 'pry'; binding.pry
 
-# reunion = Reunion.new("1406 BE")
-# => #<Reunion:0x007fe4ca1defc8 ...>
+    assert_equal expected, @reunion.detailed_breakout_of_participant('Maria')
 
-# activity_1 = Activity.new("Brunch")
+  end
 
-# activity_1.add_participant("Maria", 20)
+  def test_detailed_breakout_on_complex_reunion
+    skip
+    setup_complex_reunion
 
-# activity_1.add_participant("Luther", 40)
+    expected = {
+      "Maria" => [
+        {
+          activity: "Brunch",
+          payees: ["Luther"],
+          amount: 10
+        },
+        {
+          activity: "Drinks",
+          payees: ["Louis"],
+          amount: -20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Louis"],
+          amount: 10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Louis", "Nemo"],
+          amount: 10
+        }
+      ],
+      "Luther" => [
+        {
+          activity: "Brunch",
+          payees: ["Maria"],
+          amount: -10
+        },
+        {
+          activity: "Drinks",
+          payees: ["Louis"],
+          amount: -20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Louis"],
+          amount: 10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Louis", "Nemo"],
+          amount: 10
+        }
+      ],
+      "Louis" => [
+        {
+          activity: "Drinks",
+          payees: ["Maria", "Luther"],
+          amount: 20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        }
+      ],
+      "Nemo" => [
+        {
+          activity: "Jet Skiing",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        }
+      ]
+    }
 
-# reunion.add_activity(activity_1)
-
-# reunion.total_cost
-# => 60
-
-# activity_2 = Activity.new("Drinks")
-
-# activity_2.add_participant("Maria", 60)
-
-# activity_2.add_participant("Luther", 60)
-
-# activity_2.add_participant("Louis", 0)
-
-# reunion.add_activity(activity_2)
-
-# reunion.total_cost
-# => 180
-
-# reunion.breakout
-# => {"Maria" => -10, "Luther" => -30, "Louis" => 40}
-
-# reunion.summary
-# => "Maria: -10\nLuther: -30\nLouis: 40"
-
-# puts reunion.summary
+    assert_equal expected, @reunion.detailed_breakout
+  end
 
 end
