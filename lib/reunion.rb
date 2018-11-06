@@ -20,13 +20,13 @@ class Reunion
   #
   def breakout
     debt_amt = {}
-    @activities.map do |act|
+    @activities.each do |act|
       # binding.pry
-      @participants.map do |name, cost|
-        debt_amt[name] += act.owed
+      debt_amt = act.participants.each do |name, cost|
+        act.owed[name] += cost
       end
+      debt_amt
     end
-    debt_amt
   #   array_owed = @activities.map do |activity|
   #     activity.owed
   #   end
