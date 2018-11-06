@@ -74,9 +74,33 @@ class ReunionTest < MiniTest::Test
     act_2.add_participant("Louis", 0)
     reunion.add_activity(act_2)
     summary = "Maria: -10\nLuther: -30\nLouis: 40"
-    
+
     assert_equal summary, reunion.summary
     assert_instance_of String, reunion.summary
     assert_equal 32, reunion.summary.length
+  end
+
+  def test_it_can_do_a_detailed_breakout
+    reunion = Reunion.new("1406 BE")
+    act_1 = Activity.new("Brunch")
+    act_2 = Activity.new("lunch")
+    act_1.add_participant("Maria", 20)
+    act_1.add_participant("Luther", 40)
+    reunion.add_activity(act_1)
+    # act_2.add_participant("Maria", 60)
+    # act_2.add_participant("Luther", 60)
+    # act_2.add_participant("Louis", 0)
+    # reunion.add_activity(act_2)
+    breakout = {
+      "Maria" => [{activity: "Brunch",
+                  payees: ["Luther"],
+                  amount: 10}],
+      "Luther" => [{activity: "Brunch",
+                  payees: ["Maria"],
+                  amount: -10}]
+                }
+
+                # binding.pry
+    assert_equal breakout, reunion.detailed_breakout
   end
 end

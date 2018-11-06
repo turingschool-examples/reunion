@@ -20,13 +20,10 @@ class Activity
 
   def owed
     owed = Hash.new
-    @participants.map do |person, cost|
+    @participants.each do |person, cost|
       tally = split - cost
       owed[person] = tally
     end
     owed
   end
-
-  
-
 end

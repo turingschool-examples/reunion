@@ -29,8 +29,27 @@ class Reunion
   end
 
   def summary
-    breakout.map do |key, value|
-      "#{key}: #{value}\n"
+    breakout.map do |person, owed|
+      "#{person}: #{owed}\n"
     end.join.chomp
+  end
+
+  def detailed_breakout
+    final_hash = Hash.new(0)
+
+    @activities.each do |activity|
+       activity.participants.keys.each do |person|
+        final_hash[person] = 0
+      end
+    end
+
+    final_hash
+
+    #return should be a hash
+    #each key is the name of attendee
+    #value is an array that contains hashes of
+    #activity: (String name of activity)
+    #payees: names of other attendees
+    #amount: total amount owed pos or neg
   end
 end
