@@ -35,10 +35,10 @@ class Reunion
   end
   
   def detailed_breakout
-    breakout = {}
+    breakout = Hash.new {|h, k| h[k] = []}
     @activities.each do |activity|
       activity.participants.each do |name, paid|
-        breakout[name] = activity.payees_breakout[name]
+        breakout[name] << activity.payees_breakout[name]
       end
     end
     breakout

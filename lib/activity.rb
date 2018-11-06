@@ -46,8 +46,9 @@ class Activity
   def payees_breakout
     breakout = {}
     owed.each do |name, amount|
-      payee_names = payees(name).count == 1 ? payees(name).first : payees(name)
-      breakout[name] = {activity: @name, payees: payee_names, amount: amount / payees(name).count}
+      breakout[name] = {activity: @name, 
+                        payees: payees(name), 
+                        amount: amount / payees(name).count}
     end
     breakout
   end
