@@ -19,4 +19,15 @@ class ActivityTest < Minitest::Test
     assert_equal 0, @activity.participants.count
     assert_equal Hash, @activity.participants.class
   end
+
+  def test_it_can_add_participants
+    assert_equal 0, @activity.participants.count
+
+    @activity.add_participant("Maria", 20)
+
+    expected = { "Maria" => 20 }
+
+    assert_equal 1, @activity.participants.count
+    assert_equal expected, @activity.participants
+  end
 end
