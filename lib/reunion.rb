@@ -21,6 +21,8 @@ class Reunion
        owe
      end
    end
-   almost_there[0].merge(almost_there[1])
+   almost_there[0].merge(almost_there[1]) do |key, oldval, newval|
+     oldval + newval
+   end
  end
 end
