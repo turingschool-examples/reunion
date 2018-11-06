@@ -34,6 +34,7 @@ class Activity
       else
         payees << person if amount_owed > 0
       end
+
       payees
     end
   end

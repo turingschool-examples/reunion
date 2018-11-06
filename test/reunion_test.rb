@@ -78,7 +78,6 @@ class ReunionTest < Minitest::Test
   end
 
   def test_it_gives_detailed_breakout
-    skip
     activity_1 = Activity.new("Brunch")
     activity_1.add_participant("Maria", 20)
     activity_1.add_participant("Luther", 40)
@@ -174,7 +173,7 @@ class ReunionTest < Minitest::Test
         }
       ]
     }
-    require "pry"; binding.pry
+    
     assert_equal expected, @reunion.detailed_breakout
   end
 

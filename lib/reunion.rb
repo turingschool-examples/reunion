@@ -34,6 +34,7 @@ class Reunion
     total_participants = participants
     total_participants.inject({}) do |breakout, name|
       breakout[name] = list_detailed_info(name)
+      breakout
     end
   end
 
@@ -45,15 +46,19 @@ class Reunion
   end
 
   def list_detailed_info(name)
-    @activities.map do |activity|
-      owed = activity.owed[name]
-      payees = activity.find_payees(name)
-      {
-        activity: activity.name,
-        payees: payees,
-        amount: owed / payees.count
-      }
+    details = @activities.map do |activity|
+      if activity.participants.keys.include?(name)
+        owed = activity.owed[name]
+        payees = activity.find_payees(name)
+        {
+          activity: activity.name,
+          payees: payees,
+          amount: owed / payees.count
+        }
+      end
     end
+
+    details.compact
   end
 
 end
