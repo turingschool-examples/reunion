@@ -25,4 +25,13 @@ class Reunion
      oldval + newval
    end
  end
+
+ def summary
+   initial = breakout.to_s.gsub(/[^\w,-]{1,}/, "")
+   reformat = initial.gsub(",", "\n")
+   reformat.insert(5, ": ")
+   reformat.insert(17, ": ")
+   reformat.insert(28, ": ")
+   "#{reformat}"
+ end
 end
