@@ -18,9 +18,13 @@ class Reunion
   end
 
   def breakout
-     owned_for_each_activity.find_all do |hash|
-
+   total_owed = Hash.new(0)
+   owned_for_each_activity.each do |hash|
+     hash.map do |key, value|
+       total_owed[key] += value
      end
+   end
+   total_owed
   end
 
   def owned_for_each_activity
@@ -29,6 +33,10 @@ class Reunion
         total_owed_for_activity[key] = activity.owed
       end
     end
+  end
+
+  def summary
+     "Maria: #{breakout["Maria"]} \n-Luther: #{breakout["Luther"]} \n-Louis: #{breakout["Louis"]}"
   end
 end
 
