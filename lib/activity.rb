@@ -18,4 +18,15 @@ class Activity
     end.flatten.sum
   end
 
+  def split
+    self.total_cost / @participants.count
+  end
+
+  def owed
+    debt_amt = {}
+    @participants.map do |person,paid|
+        debt_amt[person] = (self.split - paid)
+    end
+    debt_amt
+  end
 end
