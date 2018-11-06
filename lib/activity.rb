@@ -36,29 +36,43 @@ class Activity
   def owed_to
     detailed_breakout = {}
     participants.each do |person, paid|
-      unless find_people_who_owe(person).length == 0
-        owed_amount = owed[person] / find_people_who_owe(person).length
-      else
-        owed_amount = 0
-      end
-      detailed_breakout[person] = {activity: @name,
-          payees: find_people_who_owe(person), amount: owed_amount}
+      detailed_breakout[person] = {
+                                  activity: @name,
+                                  payees: find_people_who_owe(person),
+                                  amount: owed_amount(person)
+                                  }
     end
     detailed_breakout
   end
 
+  def owed_amount(person)
+    unless find_people_who_owe(person).length == 0
+      return owed[person] / find_people_who_owe(person).length
+    else
+      return 0
+    end
+  end
+
   def find_people_who_owe(person)
-    if owed[person] < 0
+    if person_is_owed?(person)
       people =  participants.find_all do |other_person, paid|
-        owed[other_person] > 0
+        person_owes?(other_person)
       end
-    elsif owed[person] > 0
-      people =  participants.find_all do |other_person, paid|
-        owed[other_person] < 0
+    elsif person_owes?(person)
+      people = participants.find_all do |other_person, paid|
+        person_is_owed?(other_person)
       end
     else
       return []
     end
     people.map { |name, amount| name }
+  end
+
+  def person_is_owed?(person)
+    owed[person] < 0
+  end
+
+  def person_owes?(person)
+    owed[person] > 0
   end
 end

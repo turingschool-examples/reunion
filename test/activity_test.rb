@@ -52,6 +52,13 @@ class ActivityTest < Minitest::Test
     assert_equal expected, activity.owed
   end
 
+  def test_it_can_tell_how_many_people_are_there
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
+    assert_equal 2, activity.total_people
+  end
+
   def test_it_can_tell_who_owed_who_for_1_person
     activity_1 = Activity.new("Brunch")
     activity_1.add_participant("Maria", 20)
