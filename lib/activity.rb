@@ -26,4 +26,15 @@ class Activity
       owed
     end
   end
+
+  def find_payees(name)
+    owed.inject([]) do |payees, (person, amount_owed)|
+      if owed[name] > 0
+        payees << person if amount_owed <= 0
+      else
+        payees << person if amount_owed > 0
+      end
+      payees
+    end
+  end
 end
