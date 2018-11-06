@@ -9,6 +9,11 @@ class ActivityTest < Minitest::Test
     assert_instance_of Activity, activity
   end
 
+  def test_it_has_name
+    activity = Activity.new("Brunch")
+    assert_equal "Brunch", activity.name
+  end
+
   def test_it_starts_with_no_participants_as_empty_hash
     activity = Activity.new("Brunch")
     assert_equal ({}), activity.participants
@@ -35,6 +40,23 @@ class ActivityTest < Minitest::Test
     activity.add_participant("Luther", 40)
     assert_equal ({"Maria" => 20, "Luther" => 40}), activity.participants
   end
+
+  def test_it_can_split_total_cost_among_participants
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
+    assert_equal 60, activity.total_cost
+    assert_equal 30, activity.split
+  end
+
+  def test_it_can_track_money_owed_after_split
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
+    assert_equal ({"Maria" => 10, "Luther" => -10}), activity.owed
+  end
+
+
 
 
 
