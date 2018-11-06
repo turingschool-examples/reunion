@@ -54,4 +54,5 @@ class ActivityTest < Minitest::Test
     expected = {"Maria" => 10, "Luther" => -10}
     assert_equal expected, activity.owed
   end
+
 end
