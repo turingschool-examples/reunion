@@ -22,6 +22,16 @@ class Reunion
     sum
   end
 
+  def breakout
+    total_money_owed = {}
+    @activities.each do |activity|
+      activity.participants.each do |name, cost|
+        total_money_owed[name] = activity.split - cost
+      end
+    end
+    total_money_owed
+  end
+
 
 
 end
