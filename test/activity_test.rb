@@ -45,5 +45,13 @@ class ActivityTest < Minitest::Test
     activity.add_participant("Maria", 20)
     activity.add_participant("Luther", 40)
     assert_equal 30 , activity.split
-  end 
+  end
+
+  def test_it_can_return_hash_of_amounts_owed
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
+    expected = {"Maria" => 10, "Luther" => -10}
+    assert_equal expected, activity.owed
+  end
 end
