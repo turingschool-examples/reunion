@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/reunion'
+require './lib/activity'
 
 class ReunionTest < Minitest::Test
   def setup
@@ -17,5 +18,13 @@ class ReunionTest < Minitest::Test
 
   def test_it_starts_with_no_activities
     assert_equal [], @reunion.activities
+  end
+
+  def test_it_can_add_activities
+    activity_1 = Activity.new("Brunch")
+    @reunion.add_activity(activity_1)
+
+    assert_equal 1, @reunion.activities.count
+    assert_equal activity_1, @reunion.activities.last
   end
 end
