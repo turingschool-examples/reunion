@@ -11,12 +11,15 @@ class ActivityTest < Minitest::Test
     assert_instance_of Activity, activity
   end
 
+  def test_it_has_a_name
+    activity = Activity.new("Brunch")
+
+    assert_equal "Brunch", activity.name
+  end
+
 end
 
 
-# pry(main)> activity = Activity.new("Brunch")
-# # => #<Activity:0x007fe4ca1df568 ...>
-#
 # pry(main)> activity.name
 # # => "Brunch"
 #
