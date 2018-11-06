@@ -29,6 +29,7 @@ class Reunion
 
   def detailed_breakout_of_participant(name)
     @activities.reduce([]) do |rslt, activity|
+      next(rslt) unless activity.participants[name]
       payees = activity.participants.reject do |k, v|
         v == activity.participants[name]
       end.keys
@@ -41,7 +42,10 @@ class Reunion
   end
 
     def detailed_breakout
-      @activities.reduce({}) do |rslt, activity|
+      participants = breakout.keys
+      participants.reduce({}) do |rslt, participant|
+        rslt[participant] = detailed_breakout_of_participant(participant)
+        rslt
       end
     end
 

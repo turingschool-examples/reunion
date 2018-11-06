@@ -115,14 +115,11 @@ class ReunionTest < Minitest::Test
         amount: 10
       }
     ]
-    require 'pry'; binding.pry
-
     assert_equal expected, @reunion.detailed_breakout_of_participant('Maria')
 
   end
 
   def test_detailed_breakout_on_complex_reunion
-    skip
     setup_complex_reunion
 
     expected = {
