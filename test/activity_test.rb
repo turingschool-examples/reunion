@@ -30,4 +30,12 @@ class ActivityTest < MiniTest::Test
     assert_equal 40, act.total_cost
     assert_equal part, act.participants
   end
+
+  def test_it_can_split_a_bill
+    act = Activity.new("Stuff")
+    act.add_participant("maria", 20)
+    act.add_participant("luther", 40)
+
+    assert_equal 30, act.split
+  end
 end
