@@ -57,4 +57,13 @@ class ActivityTest < Minitest::Test
 
     assert_equal expected, @activity.owed
   end
+
+  def test_it_can_find_payees
+    @activity.add_participant("Maria", 10)
+    @activity.add_participant("Luther", 40)
+    @activity.add_participant("James", 10)
+
+
+    assert_equal ["Luther"], @activity.find_payees("Maria")
+  end
 end
