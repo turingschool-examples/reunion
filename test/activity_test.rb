@@ -56,6 +56,25 @@ class ActivityTest < Minitest::Test
     assert_equal ({"Maria" => 10, "Luther" => -10}), activity.owed
   end
 
+  def test_it_can_give_payors_and_their_balances
+    activity_4 = Activity.new("Jet Skiing")
+    activity_4.add_participant("Maria", 0)
+    activity_4.add_participant("Luther", 0)
+    activity_4.add_participant("Louis", 40)
+    activity_4.add_participant("Nemo", 40)
+    expected = ({"Maria"=>10, "Luther"=>10})
+    assert_equal expected, activity_4.payors_and_balances
+  end
+
+  def test_it_can_give_payees
+    activity_4 = Activity.new("Jet Skiing")
+    activity_4.add_participant("Maria", 0)
+    activity_4.add_participant("Luther", 0)
+    activity_4.add_participant("Louis", 40)
+    activity_4.add_participant("Nemo", 40)
+    expected = ["Louis", "Nemo"]
+    assert_equal expected, activity_4.payees
+  end
 
 
 
