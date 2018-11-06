@@ -14,4 +14,5 @@ class Activity
   def total_cost
     total_cost = @participants.values.sum
   end
+
 end

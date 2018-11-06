@@ -39,8 +39,11 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_can_split_total_cost
-    skip
-    #it can evenly distribute cost across all participants
+    @activity.add_participant("Maria", 20)
+    @activity.add_participant("Luther", 40)
+
+    assert_equal 60, @activity.total_cost
+    assert_equal 30, @activity.split
   end
 
 end
