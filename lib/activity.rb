@@ -20,7 +20,8 @@ class Activity
     @participants.map do |person, money|
       money - divvy_up
     end
-    divvy_up 
+    divvy_up
   end
+
 
 end
