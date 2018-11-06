@@ -33,26 +33,26 @@ class Reunion
   end
 
   def detailed_breakdown
-    activities.reduce(initial_participants) do |breakdown, activity|
+    activities.reduce(participants_and_activities) do |breakdown, activity|
       bill = activity.owed
 
       bill.each do |participant, owed|
-        current_is_owed = owed < 0
+        is_owed = owed < 0
         payees = bill.find_all do |person, amount|
-          (amount < 0) != current_is_owed
+          (amount < 0) != is_owed
         end.to_h.keys
-        activity_breakdown_for_current = {
+        activity_breakdown = {
           activity: activity.name,
           payees: payees,
           amount: owed / payees.length
         }
-        breakdown[participant] << activity_breakdown_for_current
+        breakdown[participant] << activity_breakdown
       end
       breakdown
     end
   end
 
-  def initial_participants
+  def participants_and_activities
     names = activities.map do |activity|
       activity.participants.keys
     end.flatten.uniq
