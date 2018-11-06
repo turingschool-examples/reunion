@@ -17,10 +17,19 @@ class Activity
 
   def split
     divvy_up = total_cost / @participants.length
+    # @participants.map do |person, money|
+    #   money - divvy_up
+    # end
+    # divvy_up
+  end
+
+  def owed
+    share = total_cost - split
+    owed_hash = {}
     @participants.map do |person, money|
-      money - divvy_up
+      owed_hash[person] = (share - money)
     end
-    divvy_up
+    owed_hash
   end
 
 
