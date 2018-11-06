@@ -25,7 +25,7 @@ class ReunionTest < Minitest::Test
     assert_equal [@activity_1], @reunion.add_activity(@activity_1)
   end
 
-  def test_it_can_breakout_costs
+  def test_it_can_track_total_cost
     @activity_1.add_participant("Maria", 20)
     @activity_1.add_participant("Luther", 40)
     @reunion.add_activity(@activity_1)
