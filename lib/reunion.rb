@@ -17,4 +17,11 @@ class Reunion
         person.total_cost
     end.flatten.sum
   end
+
+  def breakout
+    @activities.map do |activity|
+      # binding.pry
+      activity.split
+    end
+  end
 end
