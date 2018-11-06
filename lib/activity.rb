@@ -1,7 +1,8 @@
 class Activity
 
   attr_reader :name,
-              :participants
+              :participants,
+              :total_cost
 
   def initialize(name)
     @name = name
