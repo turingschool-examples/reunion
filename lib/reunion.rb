@@ -55,5 +55,13 @@ class Reunion
     end.flatten.compact
   end
 
+  def amount_owed_per_activity(person, fun_time)
+    activities_by_person(person).map do |activity|
+      if activity == fun_time
+        activity.owed.delete(person)
+      end
+    end.compact
+  end
+
 
 end
