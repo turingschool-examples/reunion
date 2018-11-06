@@ -13,5 +13,7 @@ class ActivityTest < Minitest::Test
     assert_instance_of Activity, @activity
   end
 
-
+  def test_it_has_a_name
+    assert_equal "Brunch", @activity.name
+  end
 end
