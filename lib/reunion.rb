@@ -24,4 +24,14 @@ class Reunion
   def summary
     breakout.map { |k, v| "#{k}: #{v}" }.join("\n")
   end
+
+  def detailed_breakout
+    name_activity = @activities.group_by { |act| act.participants.keys }
+    name_activity.reduce(Hash.new([])) do |h, (names, act)|
+      names.each do |name|
+        h[name] << act
+      end
+      h
+    end
+  end
 end
