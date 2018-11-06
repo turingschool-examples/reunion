@@ -21,8 +21,9 @@ class Activity
 
   def owed
     split_amount = split
-    @participants.each do |person, cost|
-      @participants[person] = split_amount - cost
+    @participants.inject({}) do |owed, (person, cost)|
+      owed[person] = split_amount - cost
+      owed
     end
   end
 end
