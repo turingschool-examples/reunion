@@ -1,7 +1,7 @@
-require './lib/reunion'
-require './lib/activity'
 require 'minitest/autorun'
 require 'minitest/emoji'
+require './lib/activity'
+require './lib/reunion'
 require 'pry'
 
 class ReunionTest < Minitest::Test
@@ -19,15 +19,12 @@ class ReunionTest < Minitest::Test
     assert_equal [], reunion.activities
   end
 
-end
+  def test_it_can_add_activities
+    reunion = Reunion.new("1406 BE")
+    activity_1 = Activity.new("Brunch")
+    reunion.add_activity(activity_1)
 
-# pry(main)> reunion.activities
-# # => []
-#
-# pry(main)> activity_1 = Activity.new("Brunch")
-# # => #<Activity:0x007fe4ca1d9438 ...>
-#
-# pry(main)> reunion.add_activity(activity_1)
-#
-# pry(main)> reunion.activities
-# # => [#<Activity:0x007fe4ca1d9438 ...>]
+    assert_equal [activity_1], reunion.activities
+  end
+
+end
