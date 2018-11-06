@@ -14,7 +14,20 @@ class ActivityTest < MiniTest::Test
     act = Activity.new("Stuff")
     act.add_participant("maria", 20)
     part = {"maria" => 20}
-    
+
+    assert_equal part, act.participants
+  end
+
+  def test_it_can_get_total_cost
+    act = Activity.new("Stuff")
+    act.add_participant("maria", 20)
+
+    assert_equal 20, act.total_cost
+
+    act.add_participant("steve", 20)
+    part = {"maria" => 20, "steve" => 20}
+
+    assert_equal 40, act.total_cost
     assert_equal part, act.participants
   end
 end
