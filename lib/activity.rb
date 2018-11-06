@@ -31,16 +31,19 @@ class Activity
   def payees(name)
     owed_list = owed
     participant_amount = owed_list.delete(name)
+    find_who_owes(owed_list, participant_amount).keys
+  end
+  
+  def find_who_owes(owed_list, participant_amount)
     if participant_amount < 0
-      owed_list.delete_if do |name, amount|
+      owed_list.delete_if do |n, amount|
         amount < 0
       end
     else 
-      owed_list.delete_if do |name, amount|
+      owed_list.delete_if do |n, amount|
         amount > 0
       end
     end
-    owed_list.keys
   end
   
   def payees_breakout
