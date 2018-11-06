@@ -75,7 +75,6 @@ class ReunionTest < Minitest::Test
   end
 
   def test_it_can_produce_string_sumary_of_the_breakout_properly_formated
-    skip
     reunion = Reunion.new("1406 BE")
     activity_1 = Activity.new("Brunch")
     activity_1.add_participant("Maria", 20)
@@ -89,7 +88,7 @@ class ReunionTest < Minitest::Test
     reunion.add_activity(activity_2)
 
     expected = "Maria: -10\nLuther: -30\nLouis: 40"
-    assert_equal expected, reunion.breakout
+    assert_equal expected, reunion.summary
 
   end
 

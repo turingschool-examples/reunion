@@ -33,6 +33,11 @@ class Reunion
       breakout_hash
   end
 
-
+  def summary
+    printed = breakout.map do |name, owed|
+      "#{name.to_sym}: #{owed}\n"
+    end
+    printed.join.chomp
+  end
 
 end
