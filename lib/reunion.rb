@@ -30,7 +30,7 @@ class Reunion
   def summary
     breakout_hash = breakout
     final = breakout_hash.map do
-      |key, value| "#{key}+:  #{value}"
+      |key, value| "#{key}:  #{value}"
     end
     final.to_s
     # inverted_symbol = breakout_hash.invert.transform_values {|value| value.to_sym}
