@@ -43,4 +43,21 @@ class ReunionTest < MiniTest::Test
 
     assert_equal 180, reunion.total_cost
   end
+
+  def test_it_can_breakout_costs_per_person
+    reunion = Reunion.new("1406 BE")
+    act_1 = Activity.new("Brunch")
+    act_2 = Activity.new("lunch")
+    act_1.add_participant("Maria", 20)
+    act_1.add_participant("Luther", 40)
+    reunion.add_activity(act_1)
+    act_2.add_participant("Maria", 60)
+    act_2.add_participant("Luther", 60)
+    act_2.add_participant("Louis", 0)
+    reunion.add_activity(act_2)
+    breakout = {"Maria" => -10, "Luther" => -30,
+                "Louis" => 40}
+
+    assert_equal breakout, reunion.breakout
+  end
 end

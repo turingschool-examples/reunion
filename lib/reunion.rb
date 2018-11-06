@@ -18,4 +18,13 @@ class Reunion
     end.sum
   end
 
+  def breakout
+    hash = Hash.new(0)
+    @activities.map do |activity|
+      activity.owed.each do |key, value|
+        hash[key] += value
+      end
+    end
+    hash
+  end
 end
