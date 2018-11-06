@@ -19,8 +19,12 @@ class Reunion
   end
 
   def breakout
-    @activities.map do |activity|
-      activity.owed
+    final_owed = Hash.new(0)
+    owed = @activities.map do |activity|
+      activity.owed.each do |person, money|
+        final_owed[person] += money
+      end
     end
+    final_owed
   end
 end

@@ -23,7 +23,7 @@ class Activity
     share = total_cost - split
     owed_hash = {}
     @participants.map do |person, money|
-      owed_hash[person] = (split - money)#(share - money)
+      owed_hash[person] = (split - money)
     end
     owed_hash
   end
