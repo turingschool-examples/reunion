@@ -34,6 +34,14 @@ class Reunion
       end
     end
     breakout_tally
+
+  end
+
+  def summary
+    pretty_print = breakout.map do |key, value|
+      "#{key}: #{value}"
+    end
+    pretty_print.join("\n")
   end
 
 end
