@@ -29,24 +29,25 @@ class Activity
   end
   
   def payees(name)
-    payees = []
-    if @participants[name] < split
-      @participants.each do |participant, amount|
-        payees << participant if amount >= split
-      end 
-    else
-      @participants.each do |participant, amount|
-        payees << participant if amount < split
+    owed_list = owed
+    participant_amount = owed_list.delete(name)
+    if participant_amount < 0
+      owed_list.delete_if do |name, amount|
+        amount < 0
+      end
+    else 
+      owed_list.delete_if do |name, amount|
+        amount > 0
       end
     end
-    # payees.count == 1 ? payees.first : payees
-    payees
+    owed_list.keys
   end
   
   def payees_breakout
     breakout = {}
     owed.each do |name, amount|
-      breakout[name] = {activity: @name, payees: payees(name) , amount: amount / payees(name).count}
+      payee_names = payees(name).count == 1 ? payees(name).first : payees(name)
+      breakout[name] = {activity: @name, payees: payee_names, amount: amount / payees(name).count}
     end
     breakout
   end

@@ -33,4 +33,14 @@ class Reunion
       "#{name}: #{owed}"
     end.join("\n")
   end
+  
+  def detailed_breakout
+    breakout = {}
+    @activities.each do |activity|
+      activity.participants.each do |name, paid|
+        breakout[name] = activity.payees_breakout[name]
+      end
+    end
+    breakout
+  end
 end

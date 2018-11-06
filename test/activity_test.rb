@@ -59,7 +59,7 @@ class ActivityTest < Minitest::Test
     activity_2.add_participant("Maria", 60)
     activity_2.add_participant("Luther", 60)
     activity_2.add_participant("Louis", 0)
-    expected = ({"Maria" => {activity: "Drinks", payees: "Louis", amount: -20}, "Luther" => {activity: "Drinks", payees: "Louis", amount: -20}, "Louis" => {activity: "Drinks", payees: ["Maria", "Louis"], amount: 20}})
+    expected = ({"Maria" => {activity: "Drinks", payees: "Louis", amount: -20}, "Luther" => {activity: "Drinks", payees: "Louis", amount: -20}, "Louis" => {activity: "Drinks", payees: ["Maria", "Luther"], amount: 20}})
     assert_equal expected, activity_2.payees_breakout
   end
   
@@ -68,8 +68,8 @@ class ActivityTest < Minitest::Test
     activity.add_participant("Maria", 60)
     activity.add_participant("Luther", 60)
     activity.add_participant("Louis", 0)
-    assert_equal "Louis", activity.payees("Maria")
-    assert_equal "Louis", activity.payees("Luther")
+    assert_equal ["Louis"], activity.payees("Maria")
+    assert_equal ["Louis"], activity.payees("Luther")
     assert_equal ["Maria", "Luther"], activity.payees("Louis")
   end
   
