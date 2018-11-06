@@ -17,4 +17,10 @@ class Reunion
       activity.total_cost
     end.sum
   end
+
+  def breakout
+    @activities.map do |activity|
+      activity.owed
+    end
+  end
 end
