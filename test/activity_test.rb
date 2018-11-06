@@ -56,4 +56,5 @@ class ActivityTest < Minitest::Test
 
     assert_equal expected, @activity.owed
   end
+
 end
