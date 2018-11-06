@@ -29,12 +29,16 @@ class ActivityTest < Minitest::Test
     assert_equal expected, activity.participants
   end
 
-  def test_it_can_return_the_total_cost_of_the_activity
+  def test_it_can_return_the_total_cost_paid_for_the_activity
     activity = Activity.new("Brunch")
     activity.add_participant("Maria", 20)
 
 
     assert_equal 20, activity.total_cost
+
+    activity.add_participant("Luther", 40)
+    
+    assert_equal 60, activity.total_cost
   end
 
   def test_that_more_than_one_participant_can_be_added
