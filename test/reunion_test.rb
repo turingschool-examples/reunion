@@ -212,6 +212,6 @@ class ReunionTest < Minitest::Test
     reunion.add_activity(activity_2)
     reunion.add_activity(activity_3)
     reunion.add_activity(activity_4)
-    assert_equal -10, reunion.pay_amount("Maria", "Jet Skiing")
+    assert_equal 10, reunion.pay_amount("Maria", "Jet Skiing")
   end
 end
