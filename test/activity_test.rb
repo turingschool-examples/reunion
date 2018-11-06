@@ -29,19 +29,37 @@ class ActivityTest < Minitest::Test
     assert_equal ({"Maria" => 20}), activity.participants
   end
 
-  def test_it_can_add_check_the_cost
+  def test_it_can_check_the_cost
     activity = Activity.new("Brunch")
     activity.add_participant("Maria", 20)
 
     assert_equal 20, activity.total_cost
   end
 
-  def test_it_can_add_check_the_cost
+  def test_it_can_add_more_participants_and_check_the_total_cost
     activity = Activity.new("Brunch")
     activity.add_participant("Maria", 20)
     activity.add_participant("Luther", 40)
 
-    assert_equal ({"Maria" => 20, "Luther" => 40}), activity.participants
+    assert_equal 60, activity.total_cost
   end
+
+
+
+# pry(main)> activity = Activity.new("Brunch")
+# # => #<Activity:0x007fe4ca1df568 ...>
+#
+# pry(main)> activity.add_participant("Maria", 20)
+#
+# pry(main)> activity.add_participant("Luther", 40)
+#
+# pry(main)> activity.total_cost
+# # => 60
+#
+# pry(main)> activity.split
+# # => 30
+
+# pry(main)> activity.owed
+# # => {"Maria" => 10, "Luther" => -10}
 
 end
