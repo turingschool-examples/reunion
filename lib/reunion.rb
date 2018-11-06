@@ -4,6 +4,7 @@ class Reunion
   def initialize(name)
     @name = name
     @activities = []
+
   end
 
   def add_activity(activity)
@@ -32,7 +33,34 @@ class Reunion
     end.join("\n")
   end
 
+  def owed_amount
+    new_hash = {}
+    new_hash[activity] = 0
+    new_hash[payees] = 0
+    new_hash[amount] = 0
+    @activities.each do |activity_obj|
+      activity_obj.owed.each do |person, amt|
+        if amt < 0
+          new_amt = amt.abs
+          new_hash[amount] += new_amt
+          new_hash[payees] += person
+          binding.pry
+        end
+      end
+    end
+
+  end
+
+  def detailed_breakout
+    @activities.each do |activity_obj|
+      owed_amount
+      # binding.pry
+      # activity = activity_obj.name
+      # new_hash[activity] += activity.name
+    end
+  end
 end
+
 
 # def total_cost
 #   cost_array = @activities.map do |activity|
