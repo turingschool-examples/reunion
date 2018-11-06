@@ -42,7 +42,7 @@ class Reunion
     loop_counter = 0
     breakout.each do |participant, amount_owed|
       loop_counter += 1
-      
+
         if breakout.keys.count > loop_counter
           full_string += "#{participant}: #{amount_owed}\n"
         else
@@ -50,6 +50,10 @@ class Reunion
         end
     end
     full_string
+  end
+
+  def detailed_breakout
+
   end
 
 end

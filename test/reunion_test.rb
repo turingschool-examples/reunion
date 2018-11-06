@@ -105,7 +105,28 @@ class ReunionTest < Minitest:: Test
     assert_equal expected, actual
   end
 
+  def test_it_gives_detailed_breakout_for_one_activity_and_one_person
+    reunion = Reunion.new("1406 BE")
+
+    # One person owes one person
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+
+    reunion.add_activity(activity_1)
+
+    actual   = reunion.breakout
+    expected = {
+      "Maria" => [
+      { activity: "Brunch",
+        payees: ["Luther"],
+        amount: 10
+      }}
+    assert_equal expected, actual
+  end
+
   def test_it_gives_detailed_breakout_for_participant_with_the_activity_and_who_owes_them
+skip
     reunion = Reunion.new("1406 BE")
 
     # One person owes one person
