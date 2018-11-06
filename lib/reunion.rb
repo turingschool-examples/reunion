@@ -36,5 +36,9 @@ class Reunion
     summaries.join.chomp
   end
 
+  def detailed_breakout
+    
+  end
+
 
 end
