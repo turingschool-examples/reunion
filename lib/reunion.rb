@@ -36,4 +36,14 @@ class Reunion
     summary_output.chomp
   end
 
+  def detailed_breakout
+    output = {}
+    @activities.each do |activity|
+      activity.payors_and_balances.each do |name, balance|
+        formatted_hash = {activity: activity.name, payees: activity.payees, amount: balance}
+        output.include?(name) ? output[name] << formatted_hash : output[name] = [formatted_hash]
+      end
+    end
+    output
+  end
 end
