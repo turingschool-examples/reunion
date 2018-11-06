@@ -68,32 +68,13 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_can_calculate_the_amount_owed_by_each_participant_and_return_a_hash
-    skip
     activity = Activity.new("Brunch")
     activity.add_participant("Maria", 20)
     activity.add_participant("Luther", 40)
 
     expected = {"Maria" => 10, "Luther" => -10}
 
-    assert_equal expected.owed
+    assert_equal expected, activity.owed
   end
 
 end
-
-# activity = Activity.new("Brunch")
-# # => #<Activity:0x007fe4ca1df568 ...>
-#
-# activity.add_participant("Maria", 20)
-#
-# activity.add_participant("Luther", 40)
-#
-# activity.total_cost
-# # => 60
-#
-# activity.split
-# # => 30
-#
-# activity.owed
-# # => {"Maria" => 10, "Luther" => -10}
-# ```
-#

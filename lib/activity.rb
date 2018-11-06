@@ -13,6 +13,22 @@ class Activity
     money = @participants.map do |participant, cost|
       cost
     end
-    money.sum 
+    money.sum
+  end
+
+  def total_participants
+    @participants.count
+  end
+
+  def split
+    total_cost / total_participants
+  end
+
+  def owed
+    money_owed = Hash.new(0)
+    @participants.each do |participant, paid|
+      money_owed[participant] = (split - paid)
+    end
+    money_owed
   end
 end
