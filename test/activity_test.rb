@@ -46,4 +46,6 @@ class ActivityTest < Minitest::Test
     assert_equal 30, @activity.split
   end
 
+  
+
 end
