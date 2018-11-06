@@ -24,15 +24,14 @@ class ActivityTest < Minitest::Test
   end
 
   def test_it_add_participants
-    skip
     activity = Activity.new("brunch")
     activity.add_particpant("Maria" => 20)
+    activity.add_particpant("Luther" => 40)
 
-    assert_equal ({"Maria" => 20}), activity.participants
+    assert_equal ({"Maria" => 20,"Luther" => 40}), activity.participants
   end
 
   def test_it_tracks_total_cost
-    skip
     activity = Activity.new("brunch")
     activity.add_particpant("Maria" => 20)
     activity.add_particpant("Luther" => 40)

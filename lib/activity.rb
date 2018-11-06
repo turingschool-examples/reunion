@@ -10,4 +10,8 @@ class Activity
     @participants.merge!(participant)
   end
 
+  def total_cost
+    @participants.values.sum
+  end
+
 end
