@@ -23,10 +23,14 @@ class Reunion
   end
 
   def breakout
-    total_money_owed = {}
+    total_money_owed = Hash.new(0)
     @activities.each do |activity|
       activity.participants.each do |name, cost|
-        total_money_owed[name] = activity.split - cost
+
+        current_total = total_money_owed[name]
+        total_for_activity = activity.split - cost
+
+        total_money_owed[name] = current_total + total_for_activity
       end
     end
     total_money_owed
