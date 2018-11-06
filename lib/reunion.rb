@@ -34,7 +34,6 @@ class Reunion
       end
     end
     breakout_tally
-
   end
 
   def summary
@@ -44,4 +43,20 @@ class Reunion
     pretty_print.join("\n")
   end
 
+  def detailed_breakout
+    outer_details = {}
+    inner_details = Hash.new(0)
+    @activities.each do |activity|
+      inner_details[:activity] = activity.name
+      breakout.each do |key, value|
+        if value.negative?
+          inner_details[:payees] = [key]
+        elsif value.positive?
+          inner_details[:amount] += value
+          outer_details[key] = [inner_details]
+        end
+      end
+    end
+    outer_details
+  end
 end
