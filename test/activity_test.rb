@@ -42,22 +42,12 @@ class ActivityTest < Minitest::Test
     activity.add_participant("Luther", 40)
 
     assert_equal 60, activity.total_cost
+    assert_equal 30, activity.split
   end
 
 
 
-# pry(main)> activity = Activity.new("Brunch")
-# # => #<Activity:0x007fe4ca1df568 ...>
-#
-# pry(main)> activity.add_participant("Maria", 20)
-#
-# pry(main)> activity.add_participant("Luther", 40)
-#
-# pry(main)> activity.total_cost
-# # => 60
-#
-# pry(main)> activity.split
-# # => 30
+
 
 # pry(main)> activity.owed
 # # => {"Maria" => 10, "Luther" => -10}
