@@ -12,17 +12,15 @@ class ReunionTest < Minitest::Test
     assert_instance_of Reunion, reunion
   end
 
-  def test_it_has_a_name
+  def test_it_has_a_attributes
     reunion = Reunion.new("1406 BE")
 
     assert_equal "1406 BE", reunion.name
+    assert_equal [], reunion.activities
   end
 
 end
 
-# pry(main)> reunion.name
-# # => "1406 BE"
-#
 # pry(main)> reunion.activities
 # # => []
 #
