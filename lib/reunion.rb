@@ -1,3 +1,5 @@
+require "pry"
+
 class Reunion
   attr_reader :name, :activities
 
@@ -11,8 +13,8 @@ class Reunion
   end
 
   def total_cost
-    @activities.find_all do |activity|
-      total_cost
+    @activities.map do |activity|
+      activity.total_cost
     end.sum
   end
 end
