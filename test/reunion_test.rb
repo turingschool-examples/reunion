@@ -114,7 +114,6 @@ class ReunionTest < Minitest::Test
 
 
   def test_it_can_return_a_detailed_breakout
-    skip
     reunion = Reunion.new("1406 BE")
 
     activity_1 = Activity.new("Brunch")

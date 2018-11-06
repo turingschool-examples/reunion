@@ -44,21 +44,19 @@ class Reunion
           new_amt = amt.abs
           new_hash[amount] += new_amt
           new_hash[payees] += person
-          binding.pry
         end
       end
     end
-
   end
 
   def detailed_breakout
     @activities.each do |activity_obj|
       owed_amount
-      # binding.pry
-      # activity = activity_obj.name
-      # new_hash[activity] += activity.name
+      activity = activity_obj.name
+      new_hash[activity] += activity.name
     end
   end
+
 end
 
 

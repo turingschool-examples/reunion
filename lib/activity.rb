@@ -27,6 +27,4 @@ class Activity
     amount_owed
   end
 
-
-
 end
