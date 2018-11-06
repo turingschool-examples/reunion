@@ -63,5 +63,18 @@ class Reunion
     end.compact
   end
 
+  def find_participants
+    fun_lovers = []
+    @activities.each do |activity|
+      fun_lovers << activity.participants
+    end
+    fun_lovers.map do |people|
+      people.keys
+    end.flatten.uniq
+  end
+
+  def detailed_breakout
+    
+  end
 
 end
