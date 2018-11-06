@@ -17,13 +17,14 @@ class Reunion
   end
 
   def breakout
-    require 'pry';binding.pry
     hash_array =
     @activities.map do |activity|
       activity.owed
     end
     hash_array.inject({}) do |sum, activity_total|
-      sum.merge(activity_total)
+      sum.merge(activity_total) do |key, memo_value, new_value| memo_value + new_value
+      end
     end
   end
+
 end
