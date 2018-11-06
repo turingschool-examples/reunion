@@ -49,4 +49,11 @@ class ActivityTest < Minitest::Test
     assert_equal ({"Maria" => 10, "Luther" => -10}), activity.owed
   end
 
+  def test_it_can_print_summary
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
+    assert_equal "Maria: -10\nLuther: -30\nLouis: 40", activity.summary
+  end
+
 end
