@@ -17,15 +17,16 @@ class ActivityTest < Minitest::Test
     assert_equal "Brunch", activity.name
   end
 
+  def test_it_starts_with_no_participants
+    activity = Activity.new("Brunch")
+
+    assert_equal ({}), activity.participants
+  end
+
 end
 
 
-# pry(main)> activity.name
-# # => "Brunch"
-#
-# pry(main)> activity.participants
-# # => {}
-#
+
 # pry(main)> activity.add_participant("Maria", 20)
 #
 # pry(main)> activity.participants
