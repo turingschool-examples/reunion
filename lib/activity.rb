@@ -12,15 +12,11 @@ class Activity
   end
 
   def total_cost
-    total_cost = @participants.values.sum
+    @participants.values.sum
   end
 
   def split
-    divvy_up = total_cost / @participants.length
-    # @participants.map do |person, money|
-    #   money - divvy_up
-    # end
-    # divvy_up
+    total_cost / @participants.length
   end
 
   def owed
