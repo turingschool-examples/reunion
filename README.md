@@ -123,7 +123,7 @@ pry(main)> reunion.add_activity(activity_1)
 pry(main)> reunion.total_cost
 # => 60
 
-pry(main)> activity_2 = Activity.new("Drinks")
+pry(main)> reunion.add_activity(activity_1)
 
 pry(main)> activity_2.add_participant("Maria", 60)
 
