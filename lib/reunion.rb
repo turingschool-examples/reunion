@@ -62,7 +62,6 @@ class Reunion
         inner_hash = Hash.new
         inner_hash[:activity] = specific_activity.name
 
-    #  binding.pry
         breakout.each do |new_name, amount_owed|
           if new_name != name
             name_array << new_name
