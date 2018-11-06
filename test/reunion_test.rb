@@ -92,47 +92,181 @@ class ReunionTest < Minitest::Test
 
   end
 
+  def test_it_can_give_a_detailed_breakout_when_one_person_owes_one_person
+    reunion = Reunion.new("1406 BE")
+
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+
+    reunion.add_activity(activity_1)
+
+     expected = {"Maria" =>
+          [{activity: "Brunch",
+            payees: ["Luther"],
+            amount: 10}]}
+
+     assert_equal expected, reunion.detailed_breakout
+  end
+
+  def test_it_can_give_a_detailed_breakout_when_one_person_two_people
+    reunion = Reunion.new("1406 BE")
+
+    activity_2 = Activity.new("Drinks")
+    activity_2.add_participant("Maria", 60)
+    activity_2.add_participant("Luther", 60)
+    activity_2.add_participant("Louis", 0)
+
+    reunion.add_activity(activity_2)
+
+    expected = {"Louis" =>
+               [{ activity: "Drinks",
+                  payees: ["Maria", "Luther"],
+                  amount: 20}]}
+
+    assert_equal expected, reunion.detailed_breakout
+  end
+
+  def test_it_can_git_a_detailed_breakout_when_two_people_owe_one_person
+    reunion = Reunion.new("1406 BE")
+
+    activity_3 = Activity.new("Bowling")
+    activity_3.add_participant("Maria", 0)
+    activity_3.add_participant("Luther", 0)
+    activity_3.add_participant("Louis", 30)
+
+    reunion.add_activity(activity_3)
+
+    expected = {"Louis" =>
+               [{activity: "Bowling",
+                   payees: ["Maria", "Luther"],
+                   amount: -10}]}
+
+    assert_equal expected, reunion.detailed_breakout
+  end
+
+  def test_it_can_return_a_detailed_breakout_when_two_people_owe_two_people
+    reunion = Reunion.new("1406 BE")
+
+    activity_4 = Activity.new("Jet Skiing")
+    activity_4.add_participant("Maria", 0)
+    activity_4.add_participant("Luther", 0)
+    activity_4.add_participant("Louis", 40)
+    activity_4.add_participant("Nemo", 40)
+
+    reunion.add_activity(activity_4)
+
+    expected = {"Maria" =>
+           [{activity: "Jet Skiing",
+             payees: ["Louis", "Nemo"],
+             amount: 10}], "Luther" =>
+           [{activity: "Jet Skiing",
+             payees: ["Louis", "Nemo"],
+             amount: 10}]}
+
+    assert_equal expected, reunion.detailed_breakout
+  end
+
+  def test_it_can_give_a_detailed_breakout_for_the_whole_reunion
+    reunion = Reunion.new("1406 BE")
+
+    activity_1 = Activity.new("Brunch")
+    activity_1.add_participant("Maria", 20)
+    activity_1.add_participant("Luther", 40)
+
+    activity_2 = Activity.new("Drinks")
+    activity_2.add_participant("Maria", 60)
+    activity_2.add_participant("Luther", 60)
+    activity_2.add_participant("Louis", 0)
+
+    activity_3 = Activity.new("Bowling")
+    activity_3.add_participant("Maria", 0)
+    activity_3.add_participant("Luther", 0)
+    activity_3.add_participant("Louis", 30)
+
+    activity_4 = Activity.new("Jet Skiing")
+    activity_4.add_participant("Maria", 0)
+    activity_4.add_participant("Luther", 0)
+    activity_4.add_participant("Louis", 40)
+    activity_4.add_participant("Nemo", 40)
+
+    reunion.add_activity(activity_1)
+    reunion.add_activity(activity_2)
+    reunion.add_activity(activity_3)
+    reunion.add_activity(activity_4)
+
+    expected =
+    {
+      "Maria" => [
+        {
+          activity: "Brunch",
+          payees: ["Luther"],
+          amount: 10
+        },
+        {
+          activity: "Drinks",
+          payees: ["Louis"],
+          amount: -20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Louis"],
+          amount: 10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Louis", "Nemo"],
+          amount: 10
+        }
+      ],
+      "Luther" => [
+        {
+          activity: "Brunch",
+          payees: ["Maria"],
+          amount: -10
+        },
+        {
+          activity: "Drinks",
+          payees: ["Louis"],
+          amount: -20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Louis"],
+          amount: 10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Louis", "Nemo"],
+          amount: 10
+        }
+      ],
+      "Louis" => [
+        {
+          activity: "Drinks",
+          payees: ["Maria", "Luther"],
+          amount: 20
+        },
+        {
+          activity: "Bowling",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        },
+        {
+          activity: "Jet Skiing",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        }
+      ],
+      "Nemo" => [
+        {
+          activity: "Jet Skiing",
+          payees: ["Maria", "Luther"],
+          amount: -10
+        }
+      ]
+    }
+  assert_equal expected, reunion.detailed_breakout
+  end
+
 end
-
-
-
-# # breakout` method, the key is a person's name and the value is what they owe for the whole reunion
-#
-#  reunion = Reunion.new("1406 BE")
-# #
-#  activity_1 = Activity.new("Brunch")
-#
-#  activity_1.add_participant("Maria", 20)
-#
-#  activity_1.add_participant("Luther", 40)
-#
-#  reunion.add_activity(activity_1)
-#
-#  reunion.total_cost
-# # => 60
-#
-#  activity_2 = Activity.new("Drinks")
-#
-#  activity_2.add_participant("Maria", 60)
-#
-#  activity_2.add_participant("Luther", 60)
-#
-#  activity_2.add_participant("Louis", 0)
-#
-#  reunion.add_activity(activity_2)
-#
-#  reunion.total_cost
-# # => 180
-#
-#  reunion.breakout
-# # => {"Maria" => -10, "Luther" => -30, "Louis" => 40}
-#
-#  reunion.summary
-# # => "Maria: -10\nLuther: -30\nLouis: 40"
-#
-#  puts reunion.summary
-# Maria: -10
-# Luther: -30
-# Louis: 40
-# ```
-#
