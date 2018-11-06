@@ -119,7 +119,7 @@ class ReunionTest < Minitest:: Test
       "Maria" => [
       { activity: "Brunch",
         payees: ["Luther"],
-        amount: 10 } ],
+        amount: 10 }],
       "Luther" => [
         {
           activity: "Brunch",
