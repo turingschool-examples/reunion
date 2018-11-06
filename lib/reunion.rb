@@ -46,5 +46,14 @@ class Reunion
     end
   end
 
+  def find_payees(person, fun_time)
+    activities_by_person(person).map do |activity|
+      if activity == fun_time
+        activity.participants.delete(person)
+        activity.participants.keys
+      end
+    end.flatten.compact
+  end
+
 
 end
