@@ -53,7 +53,24 @@ class Reunion
   end
 
   def detailed_breakout
+    detailed_breakout = Hash.new
+    @activities.each do |specific_activity|
+      specific_activity.participants.each do |name, cost|
 
+        info_array = []
+        new_hash = Hash.new
+        binding.pry
+        new_hash[:activity] = specific_activity
+        # info_array <<
+
+        # detailed_breakout[name] = info_array
+        # current_total      = total_money_owed[name]
+        # total_for_activity = activity.split - cost
+
+                # something = current_total + total_for_activity
+      end
+    end
+    detailed_breakout
   end
 
 end
