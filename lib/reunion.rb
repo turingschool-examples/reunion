@@ -18,18 +18,18 @@ class Reunion
   end
 
   def breakout
-    # date_offset.inject({}) do |total_offset,(key, value)|
-    #   total_offset[key] = key_offset[key] + value
-    #   total_offset
-    # end
+     owned_for_each_activity.find_all do |hash|
+
+     end
+  end
+
+  def owned_for_each_activity
     @activities.map do |activity|
-     activity.owed.inject({}) do |total_owed, (key, value)|
-       total_owed[key]
-       binding.pry
+      activity.owed.inject(Hash.new(0)) do |total_owed_for_activity, (key, value)|
+        total_owed_for_activity[key] = activity.owed
       end
     end
   end
-
 end
 
 
