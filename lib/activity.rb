@@ -22,4 +22,15 @@ class Activity
     total_cost/@participants.keys.count
   end
 
+  def owed
+     customers = @participants.each do |participant|
+       participant.last
+     end
+     owed = {}
+      customers.each do |cust, fee|
+        owed[cust] = split - fee
+      end
+    owed
+  end
+
 end

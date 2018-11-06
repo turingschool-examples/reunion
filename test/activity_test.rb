@@ -36,7 +36,7 @@ class ActivityTest < Minitest::Test
     assert_equal 20, activity.total_cost
   end
 
-  def test_it_can_add_more_participants_and_check_the_total_cost
+  def test_it_can_add_more_participants_and_check_the_total_cost_and_split_it
     activity = Activity.new("Brunch")
     activity.add_participant("Maria", 20)
     activity.add_participant("Luther", 40)
@@ -45,11 +45,13 @@ class ActivityTest < Minitest::Test
     assert_equal 30, activity.split
   end
 
+  def test_it_can_add_more_participants_and_see_how_much_each_owes
+    activity = Activity.new("Brunch")
+    activity.add_participant("Maria", 20)
+    activity.add_participant("Luther", 40)
 
-
-
-
-# pry(main)> activity.owed
-# # => {"Maria" => 10, "Luther" => -10}
+    assert_equal 60, activity.total_cost
+    assert_equal ({"Maria" => 10, "Luther" => -10}), activity.owed
+  end
 
 end
