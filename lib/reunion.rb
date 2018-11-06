@@ -11,10 +11,9 @@ class Reunion
   end
 
   def total_cost
-    @activities.map do |activity|
-       activity.total_cost
-      # binding.pry
-    end.sum
+    @activities.sum do |activity|
+      activity.total_cost
+    end
   end
 
   def breakout
@@ -29,13 +28,15 @@ class Reunion
 
   def summary
     breakout.map do |person, amount|
-      "#{person}: #{amount}"
+      p "#{person}: #{amount}"
     end.join("\n")
   end
 
-
-
-
-
-
 end
+
+# def total_cost
+#   cost_array = @activities.map do |activity|
+#      activity.total_cost
+#   end
+#   cost_array.sum
+# endg
