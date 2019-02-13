@@ -2,7 +2,7 @@
 
 ## Setup
 
-* Fork [this Repository](https://github.com/turingschool-examples/reunion)
+* Fork this Repository
 * Clone YOUR fork
 * Complete the activity below
 * Push your solution to your fork
