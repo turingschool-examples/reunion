@@ -1,4 +1,4 @@
-require "minitest"
+require "minitest/autorun"
 require "./lib/activity"
 
 class ActivityTest < Minitest::Test
@@ -26,8 +26,8 @@ class ActivityTest < Minitest::Test
 
   def test_it_can_find_total_cost
     @activity.add_participant("Maria", 20)
-    assert_equal activity.total_cost, 20
+    assert_equal @activity.total_cost, 20
     @activity.add_participant("Luther", 40)
-    assert_equal activity.total_cost, 60
+    assert_equal @activity.total_cost, 60
   end
 end
