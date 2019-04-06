@@ -29,5 +29,6 @@ class ActivityTest < Minitest::Test
     assert_equal @activity.total_cost, 20
     @activity.add_participant("Luther", 40)
     assert_equal @activity.total_cost, 60
+    assert_equal @activity.participants, {"Maria" => 20, "Luther" => 40}
   end
 end
