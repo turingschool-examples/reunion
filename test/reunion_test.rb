@@ -1,5 +1,5 @@
 require "minitest/autorun"
-require "./lib/activity"
+require "./lib/reunion"
 
 class ReunionTest < Minitest::Test
 
