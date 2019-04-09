@@ -17,13 +17,18 @@ class Reunion
   end
 
   def breakout
+    test = {}
     @activities.each do |activity|
-      @breakout.merge!(activity.owed){|k, oldv, newv| oldv + newv}
+      test.merge!(activity.owed){|k, oldv, newv| oldv + newv}
     end
-    @breakout
+    test
   end
 
   def summary
-
+    summary_string = ""
+    breakout.each_pair do |k, v|
+      summary_string += "#{k}: #{v}\n"
+    end
+    summary_string.chomp
   end
 end
