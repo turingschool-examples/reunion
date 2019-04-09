@@ -31,7 +31,7 @@ class ReunionTest < Minitest::Test
     @activity_1.add_participant("Maria", 20)
     @activity_1.add_participant("Luther", 40)
     @reunion.add_activity(@activity_1)
-    assert_equal @reunion.total_cost,
+    assert_equal @reunion.total_cost, 60
     @activity_2.add_participant("Maria", 60)
     @activity_2.add_participant("Luther", 60)
     @activity_2.add_participant("Louis", 0)
@@ -44,7 +44,7 @@ class ReunionTest < Minitest::Test
     @activity_1.add_participant("Maria", 20)
     @activity_1.add_participant("Luther", 40)
     @reunion.add_activity(@activity_1)
-    assert_equal @reunion.total_cost,
+    assert_equal @reunion.total_cost, 60
     @activity_2.add_participant("Maria", 60)
     @activity_2.add_participant("Luther", 60)
     @activity_2.add_participant("Louis", 0)
