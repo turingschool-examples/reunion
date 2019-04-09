@@ -21,7 +21,6 @@ class Activity
   end
 
   def owed
-    owed_hash = participants.dup
-    owed_hash.each_pair{|k, v| owed_hash[k] = split - v}
+    @participants.transform_values{|v| split - v}
   end
 end
