@@ -5,7 +5,6 @@ class Reunion
   def initialize(name)
     @name = name
     @activities = []
-    @breakout = {}
   end
 
   def add_activity(activity)
@@ -31,4 +30,32 @@ class Reunion
     end
     summary_string.chomp
   end
+
+  def detailed_summary
+    summaryhash = {}
+    @activities.each do |activity|
+      activity.owed.each_key do |k|
+        summaryhash[k] = []
+      end
+    end
+    @activities.each do |activity|
+      activity.owed.each_pair do |k, v|
+        others = activity.participants.keys.reject{|person| person == k}
+        summaryhash[k] << {
+          activity: activity.name,
+          payees: [],
+          amount: v
+        }
+        others.each do |person|
+          if activity.owed[k] != activity.owed[person]
+            summaryhash[k].last[:payees] << person
+          end
+        end
+        summaryhash[k].last[:amount] = (summaryhash[k].last[:amount] / \
+        summaryhash[k].last[:payees].count)
+      end
+    end
+    summaryhash
+  end
+
 end
