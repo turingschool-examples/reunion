@@ -44,6 +44,9 @@ pry(main)> activity.add_participant("Luther", 40)
 
 pry(main)> activity.participants
 # => {"Maria" => 20, "Luther" => 40}
+
+pry(main)> activity.total_cost
+# => 60
 ```
 
 ### Iteration 2: Activity Calculations and creating Reunions
