@@ -24,4 +24,20 @@ class Activity
       accumulator
     end
   end
+
+  def payees_for(participant)
+    if owed[participant] < 0
+      participants.keys.select do |participant|
+        owed[participant] > 0
+      end
+    elsif owed[participant] > 0
+      participants.keys.select do |participant|
+        owed[participant] < 0
+      end
+    end
+  end
+
+  def amount_owed_per_payee(participant)
+    owed[participant] / payees_for(participant).length
+  end
 end

@@ -44,5 +44,24 @@ class ActivityTest < Minitest::Test
     expected_hash = {"Maria" => 10, "Luther" => -10}
     assert_equal expected_hash, @activity.owed
   end
-  
+
+  def test_it_can_identify_payees_per_activity_per_person
+    @activity.add_participant("Maria", 20)
+    @activity.add_participant("Luther", 40)
+    assert_equal ["Luther"], @activity.payees_for("Maria")
+    @activity.add_participant("Bob", 0)
+    @activity.add_participant("George", 0)
+    assert_equal ["Bob", "George"], @activity.payees_for("Maria")
+  end
+
+  def test_it_can_calculate_amount_owed_per_payee_to_given_participant
+    @activity.add_participant("Maria", 40)
+    @activity.add_participant("Luther", 80)
+    @activity.add_participant("Bob", 0)
+    @activity.add_participant("George", 0)
+    assert_equal -5, @activity.amount_owed_per_payee("Maria")
+    assert_equal -25, @activity.amount_owed_per_payee("Luther")
+    assert_equal 15, @activity.amount_owed_per_payee("Bob")
+    assert_equal 15, @activity.amount_owed_per_payee("George")
+  end
 end

@@ -9,6 +9,8 @@ class ReunionTest < Minitest::Test
     @reunion = Reunion.new("1406 BE")
     @activity_1 = Activity.new("Brunch")
     @activity_2 = Activity.new("Drinks")
+    @activity_3 = Activity.new("Bowling")
+    @activity_4 = Activity.new("Jet Skiing")
   end
 
   def test_it_exists
@@ -81,5 +83,172 @@ class ReunionTest < Minitest::Test
     @activity_2.add_participant("Louis", 0)
     @reunion.add_activity(@activity_2)
     assert_equal "Maria: -10\nLuther: -30\nLouis: 40", @reunion.summary
+  end
+
+  def test_it_can_select_activities_attended_by_given_person
+    @activity_1.add_participant("Maria", 20)
+    @activity_1.add_participant("Luther", 40)
+    @reunion.add_activity(@activity_1)
+    @activity_2.add_participant("Maria", 60)
+    @activity_2.add_participant("Luther", 60)
+    @activity_2.add_participant("Louis", 0)
+    @reunion.add_activity(@activity_2)
+    assert_equal [@activity_1, @activity_2], @reunion.attended_activities("Maria")
+    assert_equal [@activity_2], @reunion.attended_activities("Louis")
+  end
+
+  def test_it_can_provide_individual_detailed_breakout
+    @activity_1.add_participant("Maria", 20)
+    @activity_1.add_participant("Luther", 40)
+    @activity_2.add_participant("Maria", 60)
+    @activity_2.add_participant("Luther", 60)
+    @activity_2.add_participant("Louis", 0)
+    @activity_3.add_participant("Maria", 0)
+    @activity_3.add_participant("Luther", 0)
+    @activity_3.add_participant("Louis", 30)
+    @activity_4.add_participant("Maria", 0)
+    @activity_4.add_participant("Luther", 0)
+    @activity_4.add_participant("Louis", 40)
+    @activity_4.add_participant("Nemo", 40)
+    @reunion.add_activity(@activity_1)
+    @reunion.add_activity(@activity_2)
+    @reunion.add_activity(@activity_3)
+    @reunion.add_activity(@activity_4)
+    expected_array = [{
+                        activity: "Brunch",
+                        payees: ["Luther"],
+                        amount: 10
+                      },
+                      {
+                        activity: "Drinks",
+                        payees: ["Louis"],
+                        amount: -20
+                      },
+                      {
+                        activity: "Bowling",
+                        payees: ["Louis"],
+                        amount: 10
+                      },
+                      {
+                        activity: "Jet Skiing",
+                        payees: ["Louis", "Nemo"],
+                        amount: 10
+                      }]
+    assert_equal expected_array, @reunion.breakout_block("Maria")
+    expected_hash = {
+                      "Maria" => [
+                        {
+                          activity: "Brunch",
+                          payees: ["Luther"],
+                          amount: 10
+                        },
+                        {
+                          activity: "Drinks",
+                          payees: ["Louis"],
+                          amount: -20
+                        },
+                        {
+                          activity: "Bowling",
+                          payees: ["Louis"],
+                          amount: 10
+                        },
+                        {
+                          activity: "Jet Skiing",
+                          payees: ["Louis", "Nemo"],
+                          amount: 10
+                        }
+                      ]
+                    }
+    assert_equal expected_hash, @reunion.ind_detailed_breakout("Maria")
+  end
+
+  def test_it_can_provide_detailed_breakout
+    @activity_1.add_participant("Maria", 20)
+    @activity_1.add_participant("Luther", 40)
+    @activity_2.add_participant("Maria", 60)
+    @activity_2.add_participant("Luther", 60)
+    @activity_2.add_participant("Louis", 0)
+    @activity_3.add_participant("Maria", 0)
+    @activity_3.add_participant("Luther", 0)
+    @activity_3.add_participant("Louis", 30)
+    @activity_4.add_participant("Maria", 0)
+    @activity_4.add_participant("Luther", 0)
+    @activity_4.add_participant("Louis", 40)
+    @activity_4.add_participant("Nemo", 40)
+    @reunion.add_activity(@activity_1)
+    @reunion.add_activity(@activity_2)
+    @reunion.add_activity(@activity_3)
+    @reunion.add_activity(@activity_4)
+    expected_hash = {
+                      "Maria" => [
+                        {
+                          activity: "Brunch",
+                          payees: ["Luther"],
+                          amount: 10
+                        },
+                        {
+                          activity: "Drinks",
+                          payees: ["Louis"],
+                          amount: -20
+                        },
+                        {
+                          activity: "Bowling",
+                          payees: ["Louis"],
+                          amount: 10
+                        },
+                        {
+                          activity: "Jet Skiing",
+                          payees: ["Louis", "Nemo"],
+                          amount: 10
+                        }
+                      ],
+                      "Luther" => [
+                        {
+                          activity: "Brunch",
+                          payees: ["Maria"],
+                          amount: -10
+                        },
+                        {
+                          activity: "Drinks",
+                          payees: ["Louis"],
+                          amount: -20
+                        },
+                        {
+                          activity: "Bowling",
+                          payees: ["Louis"],
+                          amount: 10
+                        },
+                        {
+                          activity: "Jet Skiing",
+                          payees: ["Louis", "Nemo"],
+                          amount: 10
+                        }
+                      ],
+                      "Louis" => [
+                        {
+                          activity: "Drinks",
+                          payees: ["Maria", "Luther"],
+                          amount: 20
+                        },
+                        {
+                          activity: "Bowling",
+                          payees: ["Maria", "Luther"],
+                          amount: -10
+                        },
+                        {
+                          activity: "Jet Skiing",
+                          payees: ["Maria", "Luther"],
+                          amount: -10
+                        }
+                      ],
+                      "Nemo" => [
+                        {
+                          activity: "Jet Skiing",
+                          payees: ["Maria", "Luther"],
+                          amount: -10
+                        }
+                      ]
+                    }
+    assert_equal expected_hash, @reunion.detailed_breakout
   end
 end

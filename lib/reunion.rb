@@ -34,4 +34,29 @@ class Reunion
       string + "#{participant}: #{individual_breakout(participant)}\n"
     end.chomp
   end
+
+  def attended_activities(participant)
+    @activities.select do |activity|
+      activity.participants.keys.include?(participant)
+    end
+  end
+
+  def ind_detailed_breakout(participant)
+    { participant => breakout_block(participant) }
+  end
+
+  def breakout_block(participant)
+    attended_activities(participant).map do |activity|
+      { activity: activity.name,
+        payees: activity.payees_for(participant),
+        amount: activity.amount_owed_per_payee(participant)
+      }
+    end
+  end
+
+  def detailed_breakout
+    all_participants.reduce({}) do |hash, participant|
+      hash.merge(ind_detailed_breakout(participant))
+    end
+  end
 end
