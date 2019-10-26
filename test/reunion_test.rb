@@ -85,6 +85,50 @@ class ReunionTest < Minitest::Test
     assert_equal "Maria: -10\nLuther: -30\nLouis: 40", @reunion.summary
   end
 
+  def test_it_can_provide_individual_detailed_breakout
+    @activity_1.add_participant("Maria", 20)
+    @activity_1.add_participant("Luther", 40)
+    @activity_2.add_participant("Maria", 60)
+    @activity_2.add_participant("Luther", 60)
+    @activity_2.add_participant("Louis", 0)
+    @activity_3.add_participant("Maria", 0)
+    @activity_3.add_participant("Luther", 0)
+    @activity_3.add_participant("Louis", 30)
+    @activity_4.add_participant("Maria", 0)
+    @activity_4.add_participant("Luther", 0)
+    @activity_4.add_participant("Louis", 40)
+    @activity_4.add_participant("Nemo", 40)
+    @reunion.add_activity(@activity_1)
+    @reunion.add_activity(@activity_2)
+    @reunion.add_activity(@activity_3)
+    @reunion.add_activity(@activity_4)
+    expected_hash = {
+                      "Maria" => [
+                        {
+                          activity: "Brunch",
+                          payees: ["Luther"],
+                          amount: 10
+                        },
+                        {
+                          activity: "Drinks",
+                          payees: ["Louis"],
+                          amount: -20
+                        },
+                        {
+                          activity: "Bowling",
+                          payees: ["Louis"],
+                          amount: 10
+                        },
+                        {
+                          activity: "Jet Skiing",
+                          payees: ["Louis", "Nemo"],
+                          amount: 10
+                        }
+                      ]
+                    }
+    assert_equal expected_hash, @reunion.ind_detailed_breakout("Maria")
+  end
+
   def test_it_can_provide_detailed_breakout
     @activity_1.add_participant("Maria", 20)
     @activity_1.add_participant("Luther", 40)

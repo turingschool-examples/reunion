@@ -34,4 +34,14 @@ class Reunion
       string + "#{participant}: #{individual_breakout(participant)}\n"
     end.chomp
   end
+
+  def ind_detailed_breakout(participant)
+    { participant => @activities.map do |activity|
+      { activity: activity.name,
+        payees: activity.payees_for(participant),
+        amount: activity.amount_owed_per_payee(participant)
+      }
+      end
+    }
+  end
 end
