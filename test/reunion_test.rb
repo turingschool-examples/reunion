@@ -85,6 +85,18 @@ class ReunionTest < Minitest::Test
     assert_equal "Maria: -10\nLuther: -30\nLouis: 40", @reunion.summary
   end
 
+  def test_it_can_select_activities_attended_by_given_person
+    @activity_1.add_participant("Maria", 20)
+    @activity_1.add_participant("Luther", 40)
+    @reunion.add_activity(@activity_1)
+    @activity_2.add_participant("Maria", 60)
+    @activity_2.add_participant("Luther", 60)
+    @activity_2.add_participant("Louis", 0)
+    @reunion.add_activity(@activity_2)
+    assert_equal [@activity_1, @activity_2], @reunion.attended_activities("Maria")
+    assert_equal [@activity_2], @reunion.attended_activities("Louis")
+  end
+
   def test_it_can_provide_individual_detailed_breakout
     @activity_1.add_participant("Maria", 20)
     @activity_1.add_participant("Luther", 40)
@@ -102,6 +114,27 @@ class ReunionTest < Minitest::Test
     @reunion.add_activity(@activity_2)
     @reunion.add_activity(@activity_3)
     @reunion.add_activity(@activity_4)
+    expected_array = [{
+                        activity: "Brunch",
+                        payees: ["Luther"],
+                        amount: 10
+                      },
+                      {
+                        activity: "Drinks",
+                        payees: ["Louis"],
+                        amount: -20
+                      },
+                      {
+                        activity: "Bowling",
+                        payees: ["Louis"],
+                        amount: 10
+                      },
+                      {
+                        activity: "Jet Skiing",
+                        payees: ["Louis", "Nemo"],
+                        amount: 10
+                      }]
+    assert_equal expected_array, @reunion.breakout_block("Maria")
     expected_hash = {
                       "Maria" => [
                         {
