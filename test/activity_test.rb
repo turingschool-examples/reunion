@@ -31,4 +31,18 @@ class ActivityTest < Minitest::Test
     @activity.add_participant("Luther", 40)
     assert_equal 60, @activity.total_cost
   end
+
+  def test_it_can_split_total_cost_between_participants
+    @activity.add_participant("Maria", 20)
+    @activity.add_participant("Luther", 40)
+    assert_equal 30, @activity.split
+  end
+
+  def test_it_can_calculate_amount_still_owed_by_participants_after_split
+    @activity.add_participant("Maria", 20)
+    @activity.add_participant("Luther", 40)
+    expected_hash = {"Maria" => 10, "Luther" => -10}
+    assert_equal expected_hash, @activity.owed
+  end
+  
 end
