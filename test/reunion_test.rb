@@ -59,19 +59,6 @@ class ReunionTest < Minitest::Test
     expected = {"Maria" => -10,
                 "Luther" => -30,
                 "Louis" => 40}
-
     assert_equal expected, @reunion.breakout
   end
-
-
-
-
-
-
-
-
-
-
-
-
 end

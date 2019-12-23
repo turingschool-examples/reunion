@@ -22,17 +22,17 @@ attr_reader :name, :participants
     total_cost / @participants.length
   end
 
-  # def owed
-  #   @participants.reduce({}) do |new_hash, participant_cost_array|
-  #     new_hash[participant_cost_array[0]] = split - participant_cost_array[1]
-  #     new_hash
-  #   end
-  # end
-  def owed #we set owed equal to participants after initializing it and returned this {"Maria"=>20, "Luther"=>40}
-    owed = Hash.new(0)
-    @participants.each do |name, cost|
-      owed[name] = split - cost
+  def owed
+    @participants.reduce({}) do |new_hash, participant_cost_array|
+      new_hash[participant_cost_array[0]] = split - participant_cost_array[1]
+      new_hash
     end
-    owed
   end
+  # def owed #we set owed equal to participants after initializing it and returned this {"Maria"=>20, "Luther"=>40}
+  #   owed = Hash.new(0)
+  #   @participants.each do |name, cost|
+  #     owed[name] = split - cost
+  #   end
+  #   owed
+  # end
 end
