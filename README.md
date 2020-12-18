@@ -112,6 +112,9 @@ For the `breakout` method, the key is a person's name and the value is what they
 pry(main)> require './lib/reunion'
 # => true
 
+pry(main)> require './lib/activity'
+# => true
+
 pry(main)> reunion = Reunion.new("1406 BE")
 # => #<Reunion:0x007fe4ca1defc8 ...>
 
